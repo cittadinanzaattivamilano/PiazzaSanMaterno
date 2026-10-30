@@ -150,8 +150,8 @@
   .note { margin: calc(var(--u) * 3) 0 0; font-family: var(--display); font-size: var(--t-caption); font-weight: 400; line-height: 1.4; color: var(--blue); max-width: 58ch; }
   @media (min-width: 768px) {
     .tiles { grid-template-columns: repeat(3, 1fr); }
-    .voices { display: block; column-count: 2; column-gap: var(--u); }
-    .voices blockquote { break-inside: avoid; margin-bottom: var(--u); }
+    .voices { grid-template-columns: 1fr 1fr; align-items: start; }
+    .vcol { display: flex; flex-direction: column; gap: var(--u); min-width: 0; }
   }
 
   /* Chiusura e aggiornamenti */
@@ -321,10 +321,17 @@ var LIVE_URL = "https://piazza-san-matern.cittadinanzaattivamilano.workers.dev";
       var q = el("blockquote");
       q.appendChild(el("p", null, x.t));
       if (x.m) q.appendChild(el("footer", null, x.m));
-      grid.appendChild(q);
+      var cols = grid.querySelectorAll(".vcol");
+      if (cols.length === 2) {
+        /* due colonne: ogni riquadro va sotto la colonna piu' corta, cosi' partono alla pari */
+        (cols[0].offsetHeight <= cols[1].offsetHeight ? cols[0] : cols[1]).appendChild(q);
+      } else grid.appendChild(q);
     }
     function render(reset) {
-      if (reset) { grid.textContent = ""; shown = 0; }
+      if (reset) {
+        grid.textContent = ""; shown = 0;
+        if (window.matchMedia("(min-width: 768px)").matches) { grid.appendChild(el("div", "vcol")); grid.appendChild(el("div", "vcol")); }
+      }
       var list = current();
       list.slice(shown, shown + PAGE).forEach(function (x) { card(x); shown++; });
       moreBtn.hidden = shown >= list.length;
