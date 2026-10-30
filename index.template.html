@@ -157,16 +157,15 @@
   .foot p { margin: 0 0 var(--u); max-width: 64ch; }
   @media (min-width: 768px) { .foot .a { grid-column: 1 / 5; } .foot .b { grid-column: 5 / 13; } }
 
-  /* Telefono: dopo il testo di apertura, numero e pulsante affiancati */
+  /* Telefono: dopo il testo di apertura prima il numero, poi il pulsante di firma; testi secondari piu' piccoli */
   @media (max-width: 767px) {
-    .hero .lead { margin-bottom: calc(var(--u) * 4); }
-    .hero .count { grid-column: 1 / 3; grid-row: 3; display: block; margin-top: 0; text-align: left; align-self: stretch; }
-    .hero .act { grid-column: 3 / 5; grid-row: 3; display: flex; flex-direction: column; justify-content: flex-start; }
-    .hero .count .num { text-align: left; font-size: clamp(80px, 24vw, 104px); padding-right: 0; margin: 0 0 var(--u); }
-    .hero .count .num-label { font-size: 17px; margin: 0 0 var(--u); }
-    .hero .count .meta { font-size: 14px; }
-    .hero .act .cta { flex: 1 1 auto; display: flex; align-items: center; min-height: 112px; font-size: 20px; line-height: 1.1; text-align: left; padding: calc(var(--u) * 2); }
-    .hero .act .meta { font-size: 14px; margin-top: var(--u); }
+    .hero .count { grid-column: 1 / -1; grid-row: 3; margin-top: 0; margin-bottom: calc(var(--u) * 3); }
+    .hero .act { grid-column: 1 / -1; grid-row: 4; }
+    .hero .count .meta, .hero .act .meta { font-size: 13px; line-height: 1.35; }
+    .hero .act .meta { margin-top: var(--u); }
+    .meta, .hint, .foot, .foot p { font-size: 13px; }
+    .tile .t, .tile .n { font-size: 16px; }
+    blockquote .m, blockquote cite, blockquote footer { font-size: 13px; }
   }
 
   /* Barra di firma, solo quando il pulsante principale non si vede */
@@ -276,7 +275,7 @@ var LIVE_URL = "https://piazza-san-matern.cittadinanzaattivamilano.workers.dev";
     num.style.fontSize = "";
     if (!window.matchMedia("(min-width: 768px)").matches) {
       /* telefono: il numero non supera meta' della larghezza, il resto e' per il testo */
-      var wm = $("total").getBoundingClientRect().width, maxW = wrap.clientWidth * 0.98;
+      var wm = $("total").getBoundingClientRect().width, maxW = wrap.clientWidth * 0.5;
       if (wm > maxW) num.style.fontSize = (parseFloat(getComputedStyle(num).fontSize) * maxW / wm) + "px";
       return;
     }
