@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#1c44ff">
 <title>Una piazza a San Materno</title>
-<meta name="description" content="Le firme dei cittadini a favore della piazza pedonale a San Materno, nel centro del Casoretto.">
+<meta name="description" content="Al Casoretto un incrocio può diventare una piazza. Firma anche tu per la piazza pedonale di San Materno.">
 <meta property="og:title" content="Una piazza a San Materno">
-<meta property="og:description" content="Le firme dei cittadini a favore della piazza pedonale a San Materno, nel centro del Casoretto.">
+<meta property="og:description" content="Al Casoretto un incrocio può diventare una piazza. Firma anche tu per la piazza pedonale di San Materno.">
 <style>
   /* ---------- Sistema ----------
      Identita' CAMI: blu #1C44FF su bianco, spigoli vivi.
@@ -87,7 +87,7 @@
   .num { font-weight: 700; font-size: var(--t-num); line-height: .76; letter-spacing: -.06em; color: var(--blue); font-variant-numeric: tabular-nums; margin: 0 0 calc(var(--u) * 2); padding-top: calc(var(--u) * 1.5); }
   .num-label { font-size: 28px; line-height: 1.1; font-weight: 700; letter-spacing: -.02em; margin: 0 0 var(--u); }
   @media (min-width: 768px) {
-    .count { grid-column: 8 / 13; grid-row: 1 / span 3; align-self: end; margin-top: 0; padding-bottom: var(--u); }
+    .count { grid-column: 8 / 13; grid-row: 1 / span 3; align-self: end; margin-top: 0; padding-bottom: var(--u); text-align: right; }
     .num { line-height: .72; padding-top: 0; margin-bottom: calc(var(--u) * 3); white-space: nowrap; }
     .num-label { font-size: 32px; }
   }
@@ -164,31 +164,31 @@
 
   <section class="hero grid">
     <h1>Una piazza a San Materno</h1>
-    <p class="lead">Al Casoretto, davanti all’abbazia, si può fare una <strong>piazza pedonale per chi vive il quartiere</strong>. Il Comune ha un progetto. Serve anche la tua voce.</p>
+    <p class="lead">Al Casoretto, davanti all’abbazia, un incrocio può diventare <strong>una piazza per chi vive il quartiere</strong>. Il Comune ha un progetto. Serve anche la tua voce.</p>
     <div class="act">
       <a class="cta cta-main" href="https://tally.so/r/5XXDl6">Firma per la piazza →</a>
-      <p class="meta">Ci vogliono meno di 30 secondi.</p>
+      <p class="meta">Basta il tuo nome. Ci vogliono meno di 30 secondi.</p>
     </div>
     <div class="count" aria-label="Firme raccolte">
       <p class="num" id="num"><span id="total">6</span></p>
-      <p class="num-label">cittadini hanno già firmato</p>
-      <p class="meta">Aggiornato al <span id="updated">30 ottobre 2026</span>. Le firme saranno consegnate al Comune di Milano.</p>
+      <p class="num-label" id="numlabel">cittadini hanno già firmato</p>
+      <p class="meta">Le firme saranno consegnate al Comune di Milano.</p>
     </div>
   </section>
 
   <section class="sec story grid">
     <h2>Perché firmare</h2>
     <div class="body">
-      <p>Davanti all’abbazia di Santa Maria Bianca della Misericordia <strong>oggi c’è un incrocio</strong>. Il progetto prevede di chiudere al traffico il breve tratto di via Lambrate che sbocca su via Casoretto e di trasformarlo in <strong>uno spazio pedonale: un sagrato per la chiesa</strong>, con panchine, tavolini e fioriere.</p>
+      <p>Davanti all’abbazia di Santa Maria Bianca della Misericordia <strong>oggi c’è un incrocio</strong>. Il progetto del Comune prevede di chiudere al traffico il breve tratto di via Lambrate che sbocca su via Casoretto e di farne <strong>uno spazio pedonale: un sagrato per la chiesa</strong>, con panchine, tavolini e fioriere, dove fermarsi, incontrarsi e far giocare i bambini.</p>
       <p>Non è un’idea nata ieri. Se ne parla dal 2004. Un progetto di sagrato fu approvato nel 2006 dal Consiglio di Zona 3. Nel 2022 il Municipio 3 ha dato parere favorevole e nel 2023 la Giunta ha approvato la pedonalizzazione in forma sperimentale.</p>
-      <p>Chiediamo al Comune e al Municipio 3 di portare avanti il progetto e di accompagnare la piazza con cura, manutenzione e controlli, perché resti uno spazio vissuto da tutti.</p>
+      <p>In questi giorni circola anche una raccolta firme contro il progetto. È giusto ascoltare tutti, ma <strong>anche la voce di chi questa piazza la vuole</strong>. Chiediamo al Comune e al Municipio 3 di portare avanti il progetto e di prendersi cura della piazza, con manutenzione e controlli, perché resti uno spazio vissuto da tutti.</p>
     </div>
   </section>
 
   <section class="sec voices-grid grid">
     <h2>Le voci dei cittadini</h2>
     <div class="body">
-      <p class="hint">Firme per Municipio. Tocca un riquadro per leggere i commenti.</p>
+      <p class="hint">Le persone che hanno firmato, divise per Municipio. Tocca un Municipio per leggere i loro commenti.</p>
       <ul class="tiles" id="bars"></ul>
       <p class="selinfo" id="selinfo" hidden><span id="selname"></span><button type="button" id="reset">Mostra tutti</button></p>
       <div class="voices" id="voices"></div>
@@ -196,14 +196,13 @@
         <button class="more" id="more" type="button" hidden>Mostra altri commenti</button>
         <span class="status" id="status"></span>
       </div>
-      <p class="note">I commenti sono anonimi. Dove indicato, accanto compare il Municipio.</p>
     </div>
   </section>
 
   <section class="sec close grid">
     <h2>Aggiungi la tua firma</h2>
     <div class="body">
-      <p class="lead">Un nome, un clic. Più siamo, più il Comune ascolta.</p>
+      <p class="lead">Basta un nome. Più siamo, più la nostra voce si sente.</p>
       <a class="cta cta-main" href="https://tally.so/r/5XXDl6">Firma per la piazza →</a>
     </div>
   </section>
@@ -211,14 +210,14 @@
   <section class="sec follow grid">
     <h2>Resta aggiornato</h2>
     <div class="body">
-      <p>Raccontiamo come va avanti la piazza di San Materno e le altre iniziative per il quartiere e per la città.</p>
-      <a class="cta cta-alt" href="https://maledettebiciclettemilanesi.substack.com/">Seguici su Maledette Biciclette Milanesi →</a>
+      <p>Su Maledette Biciclette Milanesi raccontiamo come va avanti la piazza di San Materno e le altre iniziative per il quartiere e per la città.</p>
+      <a class="cta cta-alt" href="https://maledettebiciclettemilanesi.substack.com/">Leggi gli aggiornamenti →</a>
     </div>
   </section>
 
   <footer class="foot grid">
     <div class="a"><p>Raccolta promossa da CAMI – Cittadinanza Attiva Milano insieme a <a href="https://maledettebiciclettemilanesi.substack.com/">Maledette Biciclette Milanesi</a>.</p></div>
-    <div class="b"><p>Nome, cognome, Municipio (facoltativo) e commento sono raccolti da CAMI solo per consegnare le adesioni al Comune di Milano e cancellati entro 6 mesi dalla consegna. Per accedere ai dati o farli cancellare: cittadinanzaattivamilano@gmail.com</p></div>
+    <div class="b"><p>Raccogliamo nome, cognome, Municipio (facoltativo) e commento solo per consegnare le adesioni al Comune di Milano, e li cancelliamo entro 6 mesi dalla consegna. Per accedere ai dati o farli cancellare scrivi a <a href="mailto:cittadinanzaattivamilano@gmail.com">cittadinanzaattivamilano@gmail.com</a>.</p></div>
   </footer>
 
 </main>
@@ -268,7 +267,7 @@ var LIVE_URL = "https://piazza-san-matern.cittadinanzaattivamilano.workers.dev";
   function init(D) {
     var TOTAL = D.TOTAL, UPDATED = D.UPDATED, MUNICIPI = D.MUNICIPI, COMMENTS = D.COMMENTS;
     $("total").textContent = it.format(TOTAL);
-    $("updated").textContent = UPDATED;
+    $("numlabel").textContent = TOTAL === 1 ? "cittadino ha già firmato" : "cittadini hanno già firmato";
 
     var counts = {};
     COMMENTS.forEach(function (x) { if (x.m) counts[x.m] = (counts[x.m] || 0) + 1; });
@@ -295,7 +294,7 @@ var LIVE_URL = "https://piazza-san-matern.cittadinanzaattivamilano.workers.dev";
         ? "Commenti " + it.format(shown) + " di " + it.format(list.length)
         : "I primi commenti compariranno qui.";
       $("selinfo").hidden = !selected;
-      $("selname").textContent = selected ? "Commenti da " + selected : "";
+      $("selname").textContent = selected ? "Commenti " + (/^Municipio/.test(selected) ? "dal " : "da ") + selected : "";
     }
     moreBtn.onclick = function () { render(false); };
 
