@@ -1,0 +1,285 @@
+<title>Piazza San Materno</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Le firme dei residenti a favore della piazza pedonale a San Materno, nel centro del Casoretto.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+<style>
+  /* Layout: una colonna editoriale su bianco. Il numero delle firme apre la pagina, poi provenienza, voci, progetto.
+     Identità CAMI: tutto blu #1C44FF su bianco. Font di marca (Forma DJR, Publico) sostituiti da equivalenti Google.
+     I numeri sono tutti calcolati dai dati in fondo alla pagina (TOTAL, MUNICIPI e COMMENTS): per aggiornare basta cambiare quelli. */
+  :root {
+    --bg: #ffffff;
+    --fg: #1c44ff;
+    --muted: #3a58ff;
+    --line: #c6d0ff;
+    --blue: #1c44ff;
+    --blue-soft: #e3e8ff;
+    --display: "Hanken Grotesk", "Helvetica Neue", Arial, sans-serif;
+    --text: "Source Serif 4", Georgia, "Times New Roman", serif;
+    color-scheme: light;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--text);
+    font-size: 18px;
+    line-height: 1.55;
+    padding-block: 24px 56px;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+  }
+  .wrap { max-width: 680px; margin: 0 auto; display: flex; flex-direction: column; gap: 56px; }
+  a { color: var(--fg); text-underline-offset: 3px; }
+  a:focus-visible, .cta:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid var(--fg); outline-offset: 3px; }
+
+  .top {
+    display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+    font-family: var(--display); font-weight: 500; font-size: 14px; color: var(--muted);
+    border-bottom: 1px solid var(--line); padding-bottom: 14px;
+  }
+  .top b { color: var(--blue); font-weight: 800; }
+
+  h1 {
+    font-family: var(--display); font-weight: 800;
+    font-size: clamp(40px, 11vw, 72px); line-height: 1; letter-spacing: -.03em;
+    margin: 0 0 18px; text-wrap: balance;
+  }
+  .lead { margin: 0; color: var(--muted); max-width: 52ch; }
+
+  .count { display: flex; flex-direction: column; gap: 18px; align-items: flex-start; }
+  .num {
+    font-family: var(--display); font-weight: 800; line-height: .8; letter-spacing: -.04em;
+    font-size: clamp(110px, 32vw, 220px); color: var(--blue);
+    font-variant-numeric: tabular-nums; margin: 0;
+  }
+  .num-label { font-family: var(--display); font-weight: 800; font-size: 26px; line-height: 1.15; letter-spacing: -.01em; }
+  .num-label small { display: block; font-family: var(--text); font-weight: 400; font-size: 15px; letter-spacing: 0; color: var(--muted); margin-top: 6px; }
+  .cta {
+    display: inline-block; background: var(--blue); color: #ffffff; text-decoration: none;
+    font-family: var(--display); font-weight: 700; font-size: 20px; letter-spacing: -.01em;
+    padding: 14px 26px; border-radius: 2px;
+  }
+  .cta:hover { background: #0f2fd1; }
+
+  h2 {
+    font-family: var(--display); font-weight: 800; font-size: 28px; letter-spacing: -.02em; line-height: 1.1;
+    margin: 0 0 20px; padding-top: 14px; border-top: 3px solid var(--fg);
+  }
+  .note { margin: 16px 0 0; font-size: 15px; color: var(--muted); }
+
+  /* Provenienza per Municipio: al massimo 10 righe sottili */
+  .bars { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 5px; }
+  .bars li { display: grid; grid-template-columns: 112px 1fr 44px; gap: 12px; align-items: center; min-width: 0; font-family: var(--display); font-weight: 700; font-size: 15px; font-variant-numeric: tabular-nums; }
+  .bars .track { height: 10px; background: var(--blue-soft); }
+  .bars .fill { display: block; height: 100%; background: var(--blue); }
+  .bars .unk .fill { background: #bcc8ff; }
+  .bars .n { text-align: right; font-weight: 800; }
+  @media (max-width: 420px) { .bars li { grid-template-columns: 96px 1fr 40px; gap: 8px; } }
+
+  /* Voci: griglia con filtro per Municipio e "mostra altri" */
+  .filters { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 18px; }
+  .chip, .more {
+    font: 700 15px/1 var(--display); color: var(--blue); background: var(--bg);
+    border: 2px solid var(--blue); padding: 8px 14px; cursor: pointer; border-radius: 2px;
+  }
+  .chip[aria-pressed="true"] { background: var(--blue); color: #ffffff; }
+  .voices { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr)); gap: 16px; }
+  blockquote { margin: 0; padding: 18px; border: 2px solid var(--blue); display: flex; flex-direction: column; justify-content: space-between; gap: 18px; min-width: 0; }
+  blockquote p { margin: 0; font-size: 18px; line-height: 1.45; overflow-wrap: anywhere; }
+  blockquote footer { font-family: var(--display); font-weight: 800; font-size: 15px; letter-spacing: .02em; }
+  .more-row { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-top: 18px; }
+  .more { background: var(--blue); color: #ffffff; }
+  .status { font-size: 15px; color: var(--muted); }
+
+  .follow p { margin: 0 0 18px; max-width: 52ch; }
+  .follow .cta { max-width: 100%; }
+  .story p { margin: 0 0 16px; max-width: 60ch; }
+  .story p:last-child { margin-bottom: 0; }
+  .story strong { font-weight: 600; }
+
+  .foot { border-top: 1px solid var(--line); padding-top: 20px; font-size: 14px; line-height: 1.6; color: var(--muted); display: flex; flex-direction: column; gap: 10px; }
+  .foot p { margin: 0; max-width: 64ch; }
+  .foot a { color: var(--fg); }
+
+  @media (prefers-reduced-motion: no-preference) { .cta { transition: background .15s; } }
+</style>
+
+<body>
+<main class="wrap">
+
+  <header class="top">
+    <span><b>→ Cittadinanza Attiva Milano</b></span>
+    <span>con Maledette Biciclette Milanesi</span>
+  </header>
+
+  <section>
+    <h1>Una piazza a San Materno</h1>
+    <p class="lead">Le firme dei residenti a favore dello spazio pedonale davanti all’abbazia di Santa Maria Bianca della Misericordia, nel centro del Casoretto.</p>
+  </section>
+
+  <section class="count" aria-label="Firme raccolte">
+    <p class="num" id="total">6</p>
+    <div class="num-label">firme a favore della piazza<small>Aggiornato al <span id="updated">30 ottobre 2026</span>. Le firme saranno consegnate al Comune di Milano.</small></div>
+    <a class="cta" href="https://tally.so/r/5XXDl6">Firma anche tu →</a>
+  </section>
+
+  <section>
+    <h2>Da dove arrivano</h2>
+    <ul class="bars" id="bars"></ul>
+    <p class="note" id="mun-note"></p>
+  </section>
+
+  <section>
+    <h2>Le voci dei residenti</h2>
+    <div class="filters" id="filters" hidden></div>
+    <div class="voices" id="voices"></div>
+    <div class="more-row">
+      <button class="more" id="more" type="button" hidden>Mostra altri commenti</button>
+      <span class="status" id="status"></span>
+    </div>
+    <p class="note">I commenti sono pubblicati in forma anonima. Dove indicato, accanto al commento compare il Municipio.</p>
+  </section>
+
+  <section class="story">
+    <h2>Il progetto</h2>
+    <p>Oggi, davanti all’abbazia, <strong>c’è un incrocio</strong>. Il progetto del Comune prevede di chiudere al traffico il breve tratto di via Lambrate che sbocca su via Casoretto e di trasformarlo in <strong>uno spazio pedonale: un sagrato per la chiesa</strong>, con panchine, tavolini e fioriere.</p>
+    <p>Se ne parla dal 2004. Un progetto di sagrato fu approvato nel 2006 dal Consiglio di Zona 3. Nel 2022 il Municipio 3 ha dato parere favorevole e nel 2023 la Giunta ha approvato la pedonalizzazione in forma sperimentale.</p>
+    <p>Chiediamo al Comune e al Municipio 3 di portare avanti il progetto e di accompagnare la piazza con cura, manutenzione e controlli, perché resti uno spazio vissuto da tutti.</p>
+  </section>
+
+  <section class="follow">
+    <h2>Resta aggiornato</h2>
+    <p>Raccontiamo come va avanti la piazza di San Materno e le altre iniziative per il quartiere e per la città.</p>
+    <a class="cta" href="https://maledettebiciclettemilanesi.substack.com/">Seguici su Maledette Biciclette Milanesi →</a>
+  </section>
+
+  <footer class="foot">
+    <p>Raccolta promossa da CAMI – Cittadinanza Attiva Milano insieme a <a href="https://maledettebiciclettemilanesi.substack.com/">Maledette Biciclette Milanesi</a>.</p>
+    <p>Nome, cognome, Municipio (facoltativo) e commento sono raccolti da CAMI solo per consegnare le adesioni al Comune di Milano e cancellati entro 6 mesi dalla consegna. Per accedere ai dati o farli cancellare: cittadinanzaattivamilano@gmail.com</p>
+  </footer>
+
+</main>
+
+<script>
+var UPDATED = "30 ottobre 2026";
+var TOTAL = 6;
+var MUNICIPI = {"Municipio 3":2,"Municipio 2":1,"Municipio 4":1,"Municipio 7":1,"Fuori Milano":1};
+var MUN_ESTIMATE = true; /* le prime firme hanno il Municipio stimato dal CAP */
+var COMMENTS = [{"m":"Municipio 3","e":true,"ok":true,"t":"Perché il quartiere ha bisogno di più aree pedonali e meno di parcheggi.  Sarà uno spazio che renderà il quartiere più bello e favorirà la socialità!"},{"m":"Municipio 2","e":true,"ok":false,"t":"Perché è un piccolo tassello in più per costruire una città a misura di persone e non al servizio dell'ideologia dell'automobile a tutti i costi."},{"m":"Municipio 3","e":true,"ok":false,"t":"Sono cresciuto in via Ampère e andato all'oratorio Casoretto per 15 anni. È sempre stato un punto dolente la strada subito fuori dal cancello dell'ingresso, per la quantità di bambini che si muovono nelle vicinanze. Inoltre la facciata della chiesa è bellissima e sarebbe bello poterne godere con delle panchine"},{"m":"Municipio 7","e":true,"ok":false,"t":"perché serve distribuire meglio lo spazio in città!"},{"m":"Fuori Milano","e":true,"ok":false,"t":"Perche lo spazio pubblico dedicato alle persone è troppo poco rispetto a quello dedicato alle auto, nella città con i migliori mezzi pubblici in Italia"}];
+
+var LIVE_URL = ""; /* indirizzo del Worker: dati aggiornati in tempo reale */
+
+(function () {
+  var it = new Intl.NumberFormat("it-IT");
+  var $ = function (id) { return document.getElementById(id); };
+  var el = function (tag, cls, text) {
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text != null) n.textContent = text;
+    return n;
+  };
+
+  function init(D) {
+  var TOTAL = D.TOTAL, UPDATED = D.UPDATED, MUNICIPI = D.MUNICIPI, COMMENTS = D.COMMENTS, MUN_ESTIMATE = D.MUN_ESTIMATE;
+  $("bars").textContent = "";
+  $("voices").textContent = "";
+  $("filters").textContent = "";
+  $("filters").hidden = true;
+  $("total").textContent = it.format(TOTAL);
+  $("updated").textContent = UPDATED;
+
+  /* Provenienza: una riga per Municipio (al massimo 10), più "Non indicato" */
+  /* Ordine: Municipio 1..9, poi "Non indicato", "Fuori Milano" sempre ultimo */
+  function order(n) {
+    var m = /^Municipio (\d+)$/.exec(n);
+    return m ? +m[1] : (n === "Non indicato" ? 98 : 99);
+  }
+  function byOrder(a, b) { return order(a[0]) - order(b[0]); }
+  var mun = Object.keys(MUNICIPI).map(function (k) { return [k, MUNICIPI[k]]; });
+  var munTotal = mun.reduce(function (s, e) { return s + e[1]; }, 0);
+  var rows = mun.slice();
+  if (TOTAL > munTotal) rows.push(["Non indicato", TOTAL - munTotal, true]);
+  rows.sort(byOrder);
+  var peak = rows.length ? Math.max.apply(null, rows.map(function (r) { return r[1]; })) : 1;
+  rows.forEach(function (r) {
+    var li = el("li", r[2] ? "unk" : null);
+    li.appendChild(el("span", null, r[0]));
+    var track = el("span", "track"), fill = el("span", "fill");
+    fill.style.width = Math.max(3, Math.round(r[1] / peak * 100)) + "%";
+    track.appendChild(fill);
+    li.appendChild(track);
+    li.appendChild(el("span", "n", it.format(r[1])));
+    $("bars").appendChild(li);
+  });
+  $("mun-note").textContent = MUN_ESTIMATE
+    ? "Stima: per le prime firme il Municipio \u00e8 ricavato dal CAP di residenza, che pu\u00f2 coprire pi\u00f9 Municipi. Le nuove firme lo indicano direttamente."
+    : (munTotal ? it.format(munTotal) + " firme su " + it.format(TOTAL) + " indicano il Municipio." : "");
+
+  /* Voci: filtro per Municipio, 12 alla volta */
+  var PAGE = 12, filter = null, shown = 0;
+  var grid = $("voices"), moreBtn = $("more"), status = $("status");
+
+  function current() {
+    return filter ? COMMENTS.filter(function (x) { return x.m === filter; }) : COMMENTS;
+  }
+  function card(x) {
+    var q = el("blockquote");
+    q.appendChild(el("p", null, x.t));
+    if (x.m) q.appendChild(el("footer", null, x.m + (x.e ? " \u00b7 stima" : "")));
+    grid.appendChild(q);
+  }
+  function render(reset) {
+    if (reset) { grid.textContent = ""; shown = 0; }
+    var list = current();
+    list.slice(shown, shown + PAGE).forEach(function (x) { card(x); shown++; });
+    moreBtn.hidden = shown >= list.length;
+    status.textContent = list.length
+      ? "Commenti " + it.format(shown) + " di " + it.format(list.length)
+      : "I primi commenti compariranno qui.";
+  }
+  moreBtn.onclick = function () { render(false); };
+
+  var counts = {};
+  COMMENTS.forEach(function (x) { if (x.m) counts[x.m] = (counts[x.m] || 0) + 1; });
+  var withMun = Object.keys(counts).sort(function (a, b) { return order(a) - order(b); });
+  if (withMun.length > 1) {
+    var box = $("filters"), buttons = [];
+    box.hidden = false;
+    var make = function (label, value) {
+      var b = el("button", "chip", label);
+      b.type = "button";
+      b.setAttribute("aria-pressed", value === null ? "true" : "false");
+      b.addEventListener("click", function () {
+        filter = value;
+        buttons.forEach(function (o) { o.b.setAttribute("aria-pressed", o.v === value ? "true" : "false"); });
+        render(true);
+      });
+      buttons.push({ b: b, v: value });
+      box.appendChild(b);
+    };
+    make("Tutti", null);
+    withMun.forEach(function (m) { make(m + " (" + it.format(counts[m]) + ")", m); });
+  }
+  render(true);
+  }
+
+  init({ TOTAL: TOTAL, UPDATED: UPDATED, MUNICIPI: MUNICIPI, COMMENTS: COMMENTS, MUN_ESTIMATE: MUN_ESTIMATE });
+
+  /* Dati in tempo reale: se il Worker risponde, sostituiscono quelli della pagina */
+  var lastSig = null;
+  function live() {
+    if (!LIVE_URL || !window.fetch) return;
+    fetch(LIVE_URL, { cache: "no-store" }).then(function (r) { return r.ok ? r.json() : null; }).then(function (d) {
+      if (!d || typeof d.total !== "number") return;
+      var sig = d.total + "|" + d.comments.length + "|" + JSON.stringify(d.municipi);
+      if (sig === lastSig) return;
+      lastSig = sig;
+      init({ TOTAL: d.total, UPDATED: d.updated, MUNICIPI: d.municipi, COMMENTS: d.comments, MUN_ESTIMATE: true });
+    }).catch(function () {});
+  }
+  live();
+  setInterval(live, 60000);
+})();
+</script>
+</body>

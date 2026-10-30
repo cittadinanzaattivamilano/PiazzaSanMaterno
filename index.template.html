@@ -164,6 +164,8 @@
 <script>
 /*@@DATA@@*/
 
+var LIVE_URL = ""; /* indirizzo del Worker: dati aggiornati in tempo reale */
+
 (function () {
   var it = new Intl.NumberFormat("it-IT");
   var $ = function (id) { return document.getElementById(id); };
@@ -174,6 +176,12 @@
     return n;
   };
 
+  function init(D) {
+  var TOTAL = D.TOTAL, UPDATED = D.UPDATED, MUNICIPI = D.MUNICIPI, COMMENTS = D.COMMENTS, MUN_ESTIMATE = D.MUN_ESTIMATE;
+  $("bars").textContent = "";
+  $("voices").textContent = "";
+  $("filters").textContent = "";
+  $("filters").hidden = true;
   $("total").textContent = it.format(TOTAL);
   $("updated").textContent = UPDATED;
 
@@ -226,7 +234,7 @@
       ? "Commenti " + it.format(shown) + " di " + it.format(list.length)
       : "I primi commenti compariranno qui.";
   }
-  moreBtn.addEventListener("click", function () { render(false); });
+  moreBtn.onclick = function () { render(false); };
 
   var counts = {};
   COMMENTS.forEach(function (x) { if (x.m) counts[x.m] = (counts[x.m] || 0) + 1; });
@@ -250,6 +258,24 @@
     withMun.forEach(function (m) { make(m + " (" + it.format(counts[m]) + ")", m); });
   }
   render(true);
+  }
+
+  init({ TOTAL: TOTAL, UPDATED: UPDATED, MUNICIPI: MUNICIPI, COMMENTS: COMMENTS, MUN_ESTIMATE: MUN_ESTIMATE });
+
+  /* Dati in tempo reale: se il Worker risponde, sostituiscono quelli della pagina */
+  var lastSig = null;
+  function live() {
+    if (!LIVE_URL || !window.fetch) return;
+    fetch(LIVE_URL, { cache: "no-store" }).then(function (r) { return r.ok ? r.json() : null; }).then(function (d) {
+      if (!d || typeof d.total !== "number") return;
+      var sig = d.total + "|" + d.comments.length + "|" + JSON.stringify(d.municipi);
+      if (sig === lastSig) return;
+      lastSig = sig;
+      init({ TOTAL: d.total, UPDATED: d.updated, MUNICIPI: d.municipi, COMMENTS: d.comments, MUN_ESTIMATE: true });
+    }).catch(function () {});
+  }
+  live();
+  setInterval(live, 60000);
 })();
 </script>
 </body>
