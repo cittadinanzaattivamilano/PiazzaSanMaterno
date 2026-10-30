@@ -92,18 +92,17 @@
     .num-label { font-size: 32px; }
   }
 
-  /* Sezioni con titolo a sinistra e contenuto a destra */
-  .sec { border-top: 3px solid var(--blue); padding-top: calc(var(--u) * 2); }
-  .sec > h2 { margin-bottom: calc(var(--u) * 1); }
+  /* Sezioni a due colonne con filetti sottili, come nell'impaginato svizzero: un filetto sopra il titolo, uno sopra il testo */
+  .sec > h2 { border-top: 1px solid var(--blue); padding-top: calc(var(--u) * 2); margin-bottom: calc(var(--u) * 2); }
   @media (min-width: 768px) {
     .sec > h2 { grid-column: 1 / 5; position: sticky; top: calc(var(--u) * 3); align-self: start; margin-bottom: 0; }
-    .sec > .body { grid-column: 5 / 13; }
+    .sec > .body { grid-column: 5 / 13; border-top: 1px solid var(--blue); padding-top: calc(var(--u) * 2); }
   }
   .story .body p { max-width: 58ch; }
   .story .body p:first-child { font-size: var(--t-lead); line-height: 1.38; margin-bottom: calc(var(--u) * 3); }
 
   /* Municipi: elenco con numero di firme; ogni riga filtra i commenti */
-  .hint { font-family: var(--display); font-size: var(--t-caption); font-weight: 400; line-height: 1.4; color: var(--blue); margin: 0 0 calc(var(--u) * 2); }
+  .hint { font-family: var(--display); font-size: 17px; font-weight: 400; line-height: 1.4; color: var(--blue); margin: 0 0 calc(var(--u) * 2); }
   .tiles { list-style: none; margin: 0 0 calc(var(--u) * 4); padding: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--u); }
   .tile {
     display: flex; align-items: stretch; justify-content: space-between; width: 100%; min-height: 56px; padding: 0; margin: 0;
