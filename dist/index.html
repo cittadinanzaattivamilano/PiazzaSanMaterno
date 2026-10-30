@@ -77,18 +77,17 @@
   .hero .meta { margin-top: calc(var(--u) * 1.5); }
   @media (min-width: 768px) {
     .hero { padding-top: calc(var(--u) * 6); row-gap: 0; }
-    .hero h1 { grid-column: 1 / 10; margin-bottom: calc(var(--u) * 5); }
-    .hero .lead { grid-column: 1 / 7; margin-bottom: calc(var(--u) * 5); }
-    .hero .act { grid-column: 1 / 7; }
+    .hero h1 { grid-column: 1 / 8; grid-row: 1; margin-bottom: calc(var(--u) * 5); }
+    .hero .lead { grid-column: 1 / 7; grid-row: 2; margin-bottom: calc(var(--u) * 5); }
+    .hero .act { grid-column: 1 / 7; grid-row: 3; }
   }
 
-  /* 2. Il numero: e' il gesto tipografico della pagina */
-  .count { align-items: end; row-gap: calc(var(--u) * 2); }
-  .num { font-family: var(--display); font-weight: 700; font-size: var(--t-num); line-height: .76; letter-spacing: -.06em; color: var(--blue); font-variant-numeric: tabular-nums; margin: 0; padding-top: calc(var(--u) * 1.5); }
-  .num-label { font-family: var(--display); font-weight: 700; font-size: 28px; line-height: 1.1; letter-spacing: -.02em; margin: 0 0 var(--u); }
+  /* 2. Il numero: e' il gesto tipografico della pagina. Su telefono sta sotto il pulsante, da 768px accanto al testo. */
+  .count { margin-top: calc(var(--u) * 3); }
+  .num { font-weight: 700; font-size: var(--t-num); line-height: .76; letter-spacing: -.06em; color: var(--blue); font-variant-numeric: tabular-nums; margin: 0 0 calc(var(--u) * 2); padding-top: calc(var(--u) * 1.5); }
+  .num-label { font-size: 28px; line-height: 1.1; font-weight: 700; letter-spacing: -.02em; margin: 0 0 var(--u); }
   @media (min-width: 768px) {
-    .num { grid-column: 1 / 8; }
-    .count .num-meta { grid-column: 8 / 13; padding-bottom: var(--u); }
+    .count { grid-column: 8 / 13; grid-row: 1 / span 3; align-self: end; margin-top: 0; padding-bottom: var(--u); }
     .num-label { font-size: 32px; }
   }
 
@@ -169,11 +168,8 @@
       <a class="cta cta-main" href="https://tally.so/r/5XXDl6">Firma per la piazza →</a>
       <p class="meta">Ci vogliono meno di 30 secondi.</p>
     </div>
-  </section>
-
-  <section class="count grid" aria-label="Firme raccolte">
-    <p class="num" id="total">6</p>
-    <div class="num-meta">
+    <div class="count" aria-label="Firme raccolte">
+      <p class="num" id="total">6</p>
       <p class="num-label">cittadini hanno già firmato</p>
       <p class="meta">Aggiornato al <span id="updated">30 ottobre 2026</span>. Le firme saranno consegnate al Comune di Milano.</p>
     </div>
