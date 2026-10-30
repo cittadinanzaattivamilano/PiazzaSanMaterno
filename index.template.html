@@ -162,21 +162,7 @@
 </main>
 
 <script>
-/* DATI. Per aggiornare la pagina si cambiano solo queste costanti.
-   TOTAL: firme totali. MUNICIPI: firme per Municipio (solo da chi lo ha indicato; la differenza col totale è "Non indicato").
-   COMMENTS: dal più recente. m = Municipio (e = stimato dal CAP). ok = consenso alla pubblicazione dato nel form. */
-var UPDATED = "30 ottobre 2026";
-var TOTAL = 6;
-var MUNICIPI = { "Municipio 3": 2, "Municipio 2": 1, "Municipio 4": 1, "Municipio 7": 1, "Fuori Milano": 1 };
-/* STIMA: per le prime firme il Municipio è ricavato dal CAP (che non raccogliamo più). Un CAP può coprire più Municipi. */
-var MUN_ESTIMATE = true;
-var COMMENTS = [
-  {"m": "Municipio 3", "e": true, "ok": true, "t": "Perché il quartiere ha bisogno di più aree pedonali e meno di parcheggi.  Sarà uno spazio che renderà il quartiere più bello e favorirà la socialità!"},
-  {"m": "Municipio 2", "e": true, "ok": false, "t": "Perché è un piccolo tassello in più per costruire una città a misura di persone e non al servizio dell'ideologia dell'automobile a tutti i costi."},
-  {"m": "Municipio 3", "e": true, "ok": false, "t": "Sono cresciuto in via Ampère e andato all'oratorio Casoretto per 15 anni. È sempre stato un punto dolente la strada subito fuori dal cancello dell'ingresso, per la quantità di bambini che si muovono nelle vicinanze. Inoltre la facciata della chiesa è bellissima e sarebbe bello poterne godere con delle panchine"},
-  {"m": "Municipio 7", "e": true, "ok": false, "t": "perché serve distribuire meglio lo spazio in città!"},
-  {"m": "Fuori Milano", "e": true, "ok": false, "t": "Perche lo spazio pubblico dedicato alle persone è troppo poco rispetto a quello dedicato alle auto, nella città con i migliori mezzi pubblici in Italia"}
-];
+/*@@DATA@@*/
 
 (function () {
   var it = new Intl.NumberFormat("it-IT");
