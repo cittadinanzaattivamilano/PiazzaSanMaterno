@@ -161,9 +161,8 @@
   @media (max-width: 767px) {
     .hero .count { grid-column: 1 / -1; grid-row: 3; margin-top: 0; margin-bottom: calc(var(--u) * 3); }
     .hero .act { grid-column: 1 / -1; grid-row: 4; }
-    .hero .count { background: var(--blue); color: #fff; padding: calc(var(--u) * 2); grid-template-columns: auto 1fr; grid-template-areas: "num label" "num meta"; column-gap: calc(var(--u) * 2); align-items: end; margin-bottom: var(--u); }
-    .hero .count .num { color: #fff; text-align: left; padding-right: 0; font-size: clamp(104px, 32vw, 136px); }
-    .hero .count .num-label, .hero .count .meta { color: #fff; }
+    .hero .count { padding: 0; grid-template-columns: auto 1fr; grid-template-areas: "num label" "num meta"; column-gap: calc(var(--u) * 2); align-items: end; margin-bottom: calc(var(--u) * 3); }
+    .hero .count .num { text-align: left; padding-right: 0; font-size: clamp(104px, 32vw, 136px); }
     .hero .count .meta, .hero .act .meta { font-size: 13px; line-height: 1.35; }
     .hero .act .meta { margin-top: var(--u); }
     .meta, .hint, .foot, .foot p { font-size: 13px; }
