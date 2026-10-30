@@ -6,10 +6,9 @@
 <meta name="theme-color" content="#ffffff">
 <title>Una piazza a San Materno</title>
 <meta name="description" content="Le firme dei cittadini a favore della piazza pedonale a San Materno, nel centro del Casoretto.">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap">
 <style>
   /* Bianco, solo blu CAMI, un grotesco leggero con titoli grandi e a righe strette, blocchi blu arrotondati. */
-  :root { --blue: #1c44ff; --font: "Inter", "Helvetica Neue", Arial, sans-serif; color-scheme: light; }
+  :root { --blue: #1c44ff; --font: "Helvetica Neue", Helvetica, Arial, sans-serif; color-scheme: light; }
   * { box-sizing: border-box; }
   html { -webkit-text-size-adjust: 100%; }
   body { margin: 0; background: #fff; color: var(--blue); font-family: var(--font); font-weight: 400; font-size: 20px; line-height: 1.4; letter-spacing: -.01em;
@@ -19,38 +18,39 @@
   .page { max-width: 720px; margin: 0 auto; }
   section { padding-top: 56px; }
 
-  .top { display: flex; flex-direction: column; padding: 14px 0 0; font-weight: 500; font-size: 22px; line-height: 1.15; letter-spacing: -.02em; }
+  .top { display: flex; flex-direction: column; padding: 14px 0 0; font-weight: 700; font-size: 22px; line-height: 1.15; letter-spacing: -.02em; }
   .top span { font-weight: 400; font-size: 17px; letter-spacing: -.01em; margin-top: 4px; }
 
-  h1 { font-weight: 400; font-size: clamp(44px, 13.5vw, 84px); line-height: .98; letter-spacing: -.045em; margin: 28px 0 24px; }
-  h2 { font-weight: 400; font-size: clamp(38px, 11vw, 60px); line-height: 1; letter-spacing: -.04em; margin: 0 0 24px; }
+  h1 { font-weight: 700; font-size: clamp(44px, 13.5vw, 84px); line-height: .98; letter-spacing: -.045em; margin: 28px 0 24px; }
+  h2 { font-weight: 700; font-size: clamp(38px, 11vw, 60px); line-height: 1; letter-spacing: -.04em; margin: 0 0 24px; }
   p { margin: 0 0 16px; }
   strong { font-weight: 700; }
   .lead { font-size: 22px; line-height: 1.35; }
 
-  .num { font-weight: 400; font-size: clamp(170px, 52vw, 300px); line-height: .78; letter-spacing: -.07em; font-variant-numeric: tabular-nums; margin: 0 0 24px; }
-  .num-label { font-weight: 500; font-size: 28px; line-height: 1.15; letter-spacing: -.02em; }
+  .num { font-weight: 700; font-size: clamp(170px, 52vw, 300px); line-height: .78; letter-spacing: -.07em; font-variant-numeric: tabular-nums; margin: 0 0 24px; }
+  .num-label { font-weight: 700; font-size: 28px; line-height: 1.15; letter-spacing: -.02em; }
   .num-label small { display: block; font-weight: 400; font-size: 17px; letter-spacing: -.01em; margin-top: 10px; }
 
   /* Blocco blu arrotondato, come l'immagine nel sito di riferimento */
-  .block { background: var(--blue); color: #fff; border-radius: 20px; padding: 28px 22px 30px; margin-top: 28px; }
+  .block { background: var(--blue); color: #fff; border-radius: 0; padding: 28px 22px 30px; margin-top: 28px; }
   .block h2 { color: #fff; margin-bottom: 18px; }
   .block p { margin-bottom: 22px; }
   .pill { display: block; width: 100%; text-align: center; text-decoration: none; cursor: pointer; font: 700 21px/1.2 var(--font); letter-spacing: -.01em;
-          padding: 20px 18px; border-radius: 999px; background: #fff; color: var(--blue); border: 2px solid #fff; }
+          padding: 20px 18px; border-radius: 0; background: #fff; color: var(--blue); border: 2px solid #fff; }
   .pill:hover { background: #e8ecff; }
   .pill.solid { background: var(--blue); color: #fff; border-color: var(--blue); }
   .pill.solid:hover { background: #0f2fd1; }
   .pill.ghost { background: #fff; color: var(--blue); border-color: var(--blue); }
   .pill.ghost:hover { background: #eef1ff; }
 
-  .tiles { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-  .tiles li { border: 2px solid var(--blue); border-radius: 14px; padding: 12px; min-width: 0; min-height: 108px; display: flex; flex-direction: column; justify-content: space-between; gap: 12px; font-weight: 500; font-size: 19px; line-height: 1.15; }
+  .tiles { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr; gap: 10px; }
+  .tiles li { display: flex; align-items: stretch; justify-content: space-between; border: 3px solid var(--blue); min-width: 0; font-weight: 700; font-size: 22px; line-height: 1.15; letter-spacing: -.01em; }
+  .tiles li > span:first-child { display: flex; align-items: center; padding: 12px 14px; min-width: 0; }
   .tiles .unk { border-style: dashed; }
-  .tiles .n { align-self: flex-end; min-width: 52px; height: 52px; padding: 0 10px; border-radius: 10px; display: flex; align-items: center; justify-content: center; background: var(--blue); color: #fff; font-weight: 500; font-size: 28px; font-variant-numeric: tabular-nums; }
+  .tiles .n { flex: none; min-width: 64px; padding: 0 14px; display: flex; align-items: center; justify-content: center; background: var(--blue); color: #fff; font-weight: 700; font-size: 26px; font-variant-numeric: tabular-nums; }
 
   .filters { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 22px; }
-  .chip { font: 500 18px/1.1 var(--font); color: var(--blue); background: #fff; border: 2px solid var(--blue); padding: 12px 18px; min-height: 48px; border-radius: 999px; cursor: pointer; }
+  .chip { font: 700 18px/1.1 var(--font); color: var(--blue); background: #fff; border: 2px solid var(--blue); padding: 12px 18px; min-height: 48px; border-radius: 0; cursor: pointer; }
   .chip[aria-pressed="true"] { background: var(--blue); color: #fff; }
   .voices { display: flex; flex-direction: column; }
   blockquote { margin: 0; padding: 22px 0; border-top: 1px solid var(--blue); min-width: 0; }
@@ -62,7 +62,7 @@
   .note { font-size: 16px; margin: 12px 0 0; }
 
   details summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 12px; min-height: 56px;
-    font-weight: 400; font-size: clamp(38px, 11vw, 60px); line-height: 1; letter-spacing: -.04em; }
+    font-weight: 700; font-size: clamp(38px, 11vw, 60px); line-height: 1; letter-spacing: -.04em; }
   details summary::-webkit-details-marker { display: none; }
   details summary::after { content: "+"; font-size: 52px; line-height: 1; font-weight: 400; }
   details[open] summary::after { content: "\2212"; }
@@ -71,7 +71,7 @@
   .foot { padding: 40px 0 28px; font-size: 15px; line-height: 1.55; }
   .foot p { margin: 0 0 10px; }
 
-  @media (min-width: 640px) { .tiles { grid-template-columns: repeat(3, 1fr); } .block { padding: 40px 36px 42px; } }
+  @media (min-width: 640px) { .tiles { grid-template-columns: 1fr 1fr; } .block { padding: 40px 36px 42px; } }
 </style>
 </head>
 <body>
@@ -88,7 +88,7 @@
     <p class="num" id="total">6</p>
     <div class="num-label">firme a favore della piazza<small>Aggiornato al <span id="updated">30 ottobre 2026</span>. Le firme saranno consegnate al Comune di Milano.</small></div>
     <div class="block" style="margin-top:28px">
-      <p style="font-size:26px;line-height:1.15;letter-spacing:-.02em;font-weight:500">Anche tu vuoi la piazza?</p>
+      <p style="font-size:26px;line-height:1.15;letter-spacing:-.02em;font-weight:700">Anche tu vuoi la piazza?</p>
       <a class="pill" href="https://tally.so/r/5XXDl6">Firma anche tu →</a>
     </div>
   </section>
