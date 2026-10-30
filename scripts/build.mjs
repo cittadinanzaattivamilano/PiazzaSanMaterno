@@ -111,8 +111,10 @@ if (!key) {
 // evita che un commento chiuda lo script
 block = block.split("</").join("<\\/").split(String.fromCharCode(0x2028)).join(" ").split(String.fromCharCode(0x2029)).join(" ");
 
-const tpl = fs.readFileSync("index.template.html", "utf8");
-if (!tpl.includes("/*@@DATA@@*/")) throw new Error("Segnaposto dati mancante nel template");
 fs.mkdirSync("dist", { recursive: true });
-fs.writeFileSync("dist/index.html", tpl.replace("/*@@DATA@@*/", () => block));
+for (const [src, out] of [["index.template.html", "dist/index.html"], ["index.v2.template.html", "dist/nuovo.html"]]) {
+  const tpl = fs.readFileSync(src, "utf8");
+  if (!tpl.includes("/*@@DATA@@*/")) throw new Error("Segnaposto dati mancante nel template " + src);
+  fs.writeFileSync(out, tpl.replace("/*@@DATA@@*/", () => block));
+}
 console.log("Pagina costruita.");

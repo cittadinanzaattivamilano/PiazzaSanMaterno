@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#ffffff">
+<title>Una piazza a San Materno</title>
+<meta name="description" content="Le firme dei cittadini a favore della piazza pedonale a San Materno, nel centro del Casoretto.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;700;800&display=swap">
+<style>
+  /* Blocchi a tutta larghezza con angoli arrotondati, titoli grandi, pulsanti a pillola. Blu CAMI + pastelli. */
+  :root {
+    --blue: #1c44ff; --ink: #11228f;
+    --sage: #e1ebdf; --sky: #d9eef2; --sand: #f1eadc; --peach: #ffe4c6;
+    --font: "Hanken Grotesk", "Helvetica Neue", Arial, sans-serif;
+    color-scheme: light;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin: 0; background: #fff; color: var(--ink); font-family: var(--font); font-weight: 500; font-size: 20px; line-height: 1.5;
+         padding: 0 max(8px, env(safe-area-inset-left)) 8px; }
+  a { color: var(--blue); text-underline-offset: 3px; }
+  a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
+  .page { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 8px; }
+
+  .top { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; padding: 16px 12px 8px; font-weight: 800; font-size: 20px; color: var(--blue); letter-spacing: -.01em; }
+  .top span { font-weight: 500; font-size: 16px; color: var(--ink); }
+
+  .card { border-radius: 18px; padding: 26px 20px 28px; }
+  .sage { background: var(--sage); } .sky { background: var(--sky); } .sand { background: var(--sand); } .peach { background: var(--peach); }
+  .blue { background: var(--blue); color: #fff; } .outline { border: 2px solid var(--blue); }
+
+  h1 { font-weight: 500; font-size: clamp(46px, 14vw, 88px); line-height: .98; letter-spacing: -.045em; margin: 0 0 22px; color: var(--blue); }
+  h2 { font-weight: 500; font-size: clamp(38px, 11vw, 64px); line-height: 1; letter-spacing: -.04em; margin: 0 0 22px; color: var(--blue); }
+  .blue h2 { color: #fff; }
+  p { margin: 0 0 16px; }
+  .lead { font-size: 21px; line-height: 1.4; }
+
+  .pill {
+    display: block; width: 100%; text-align: center; text-decoration: none; cursor: pointer;
+    font: 800 21px/1.2 var(--font); padding: 20px 18px; border-radius: 999px;
+    background: var(--blue); color: #fff; border: 2px solid var(--blue);
+  }
+  .pill:hover { background: #0f2fd1; }
+  .pill.ghost { background: transparent; color: var(--blue); }
+  .pill.ghost:hover { background: rgba(255,255,255,.6); }
+  .blue .pill { background: #fff; color: var(--blue); border-color: #fff; }
+  .blue .pill:hover { background: #e8ecff; }
+
+  .num { font-weight: 500; font-size: clamp(150px, 46vw, 260px); line-height: .8; letter-spacing: -.06em; color: var(--blue); font-variant-numeric: tabular-nums; margin: 6px 0 22px; }
+  .num-label { font-weight: 800; font-size: 28px; line-height: 1.15; letter-spacing: -.015em; }
+  .num-label small { display: block; font-weight: 500; font-size: 17px; letter-spacing: 0; margin: 10px 0 22px; }
+
+  .tiles { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .tiles li { background: #fff; border-radius: 14px; padding: 12px; min-width: 0; min-height: 110px; display: flex; flex-direction: column; justify-content: space-between; gap: 14px; font-weight: 800; font-size: 19px; line-height: 1.15; color: var(--blue); }
+  .tiles .unk { background: transparent; border: 2px dashed var(--blue); }
+  .tiles .n { align-self: flex-end; min-width: 52px; height: 52px; padding: 0 10px; border-radius: 10px; display: flex; align-items: center; justify-content: center; background: var(--blue); color: #fff; font-size: 28px; font-variant-numeric: tabular-nums; }
+
+  .filters { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 18px; }
+  .chip { font: 700 18px/1.1 var(--font); color: var(--blue); background: transparent; border: 2px solid var(--blue); padding: 12px 18px; min-height: 48px; border-radius: 999px; cursor: pointer; }
+  .chip[aria-pressed="true"] { background: var(--blue); color: #fff; }
+  .voices { display: grid; grid-template-columns: 1fr; gap: 8px; }
+  blockquote { margin: 0; padding: 20px; background: #fff; border-radius: 14px; display: flex; flex-direction: column; justify-content: space-between; gap: 18px; min-width: 0; }
+  blockquote p { margin: 0; font-size: 20px; line-height: 1.4; overflow-wrap: anywhere; }
+  blockquote footer { font-weight: 800; font-size: 17px; color: var(--blue); }
+  .more-row { margin-top: 14px; }
+  .status { font-size: 17px; margin: 12px 0 0; }
+  .note { font-size: 16px; margin: 12px 0 0; }
+
+  details summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 12px; min-height: 56px;
+    font-weight: 500; font-size: clamp(38px, 11vw, 64px); line-height: 1; letter-spacing: -.04em; color: var(--blue); }
+  details summary::-webkit-details-marker { display: none; }
+  details summary::after { content: "+"; font-size: 48px; line-height: 1; font-weight: 400; }
+  details[open] summary::after { content: "\2212"; }
+  details .body { padding-top: 22px; }
+
+  .foot { padding: 18px 12px 28px; font-size: 15px; line-height: 1.6; }
+  .foot p { margin: 0 0 10px; }
+
+  @media (min-width: 640px) { .tiles { grid-template-columns: repeat(3, 1fr); } .voices { grid-template-columns: 1fr 1fr; } .card { padding: 36px 32px 38px; } }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="top">Cittadinanza Attiva Milano <span>con Maledette Biciclette Milanesi</span></header>
+
+  <section class="card sage">
+    <h1>Una piazza a San Materno</h1>
+    <p class="lead">Le firme dei cittadini a favore dello spazio pedonale davanti all’abbazia di Santa Maria Bianca della Misericordia, nel centro del Casoretto.</p>
+    <a class="pill" href="https://tally.so/r/5XXDl6">Firma anche tu →</a>
+  </section>
+
+  <section class="card sky" aria-label="Firme raccolte">
+    <p class="num" id="total">6</p>
+    <div class="num-label">firme a favore della piazza<small>Aggiornato al <span id="updated">30 ottobre 2026</span>. Le firme saranno consegnate al Comune di Milano.</small></div>
+    <a class="pill" href="https://tally.so/r/5XXDl6">Firma anche tu →</a>
+  </section>
+
+  <section class="card sand">
+    <h2>Da dove arrivano</h2>
+    <ul class="tiles" id="bars"></ul>
+  </section>
+
+  <section class="card peach">
+    <h2>Le voci dei cittadini</h2>
+    <div class="filters" id="filters" hidden></div>
+    <div class="voices" id="voices"></div>
+    <div class="more-row">
+      <button class="pill ghost" id="more" type="button" hidden>Mostra altri commenti</button>
+      <p class="status" id="status"></p>
+    </div>
+    <p class="note">I commenti sono anonimi. Dove indicato, accanto compare il Municipio.</p>
+  </section>
+
+  <section class="card outline">
+    <details>
+      <summary>Il progetto</summary>
+      <div class="body">
+        <p>Oggi, davanti all’abbazia, <strong>c’è un incrocio</strong>. Il progetto del Comune prevede di chiudere al traffico il breve tratto di via Lambrate che sbocca su via Casoretto e di trasformarlo in <strong>uno spazio pedonale: un sagrato per la chiesa</strong>, con panchine, tavolini e fioriere.</p>
+        <p>Se ne parla dal 2004. Un progetto di sagrato fu approvato nel 2006 dal Consiglio di Zona 3. Nel 2022 il Municipio 3 ha dato parere favorevole e nel 2023 la Giunta ha approvato la pedonalizzazione in forma sperimentale.</p>
+        <p>Chiediamo al Comune e al Municipio 3 di portare avanti il progetto e di accompagnare la piazza con cura, manutenzione e controlli, perché resti uno spazio vissuto da tutti.</p>
+      </div>
+    </details>
+  </section>
+
+  <section class="card blue">
+    <h2>Resta aggiornato</h2>
+    <p>Raccontiamo come va avanti la piazza di San Materno e le altre iniziative per il quartiere e per la città.</p>
+    <a class="pill" href="https://maledettebiciclettemilanesi.substack.com/">Seguici su Maledette Biciclette Milanesi →</a>
+  </section>
+
+  <footer class="foot">
+    <p>Raccolta promossa da CAMI – Cittadinanza Attiva Milano insieme a <a href="https://maledettebiciclettemilanesi.substack.com/">Maledette Biciclette Milanesi</a>.</p>
+    <p>Nome, cognome, Municipio (facoltativo) e commento sono raccolti da CAMI solo per consegnare le adesioni al Comune di Milano e cancellati entro 6 mesi dalla consegna. Per accedere ai dati o farli cancellare: cittadinanzaattivamilano@gmail.com</p>
+  </footer>
+
+</div>
+
+<script>
+var UPDATED = "30 ottobre 2026";
+var TOTAL = 6;
+var MUNICIPI = {"Municipio 3":2,"Municipio 2":1,"Municipio 4":1,"Municipio 7":1,"Fuori Milano":1};
+var COMMENTS = [{"m":"Municipio 3","e":true,"ok":true,"t":"Perché il quartiere ha bisogno di più aree pedonali e meno di parcheggi.  Sarà uno spazio che renderà il quartiere più bello e favorirà la socialità!"},{"m":"Municipio 2","e":true,"ok":false,"t":"Perché è un piccolo tassello in più per costruire una città a misura di persone e non al servizio dell'ideologia dell'automobile a tutti i costi."},{"m":"Municipio 3","e":true,"ok":false,"t":"Sono cresciuto in via Ampère e andato all'oratorio Casoretto per 15 anni. È sempre stato un punto dolente la strada subito fuori dal cancello dell'ingresso, per la quantità di bambini che si muovono nelle vicinanze. Inoltre la facciata della chiesa è bellissima e sarebbe bello poterne godere con delle panchine"},{"m":"Municipio 7","e":true,"ok":false,"t":"perché serve distribuire meglio lo spazio in città!"},{"m":"Fuori Milano","e":true,"ok":false,"t":"Perche lo spazio pubblico dedicato alle persone è troppo poco rispetto a quello dedicato alle auto, nella città con i migliori mezzi pubblici in Italia"}];
+
+var LIVE_URL = "https://piazza-san-matern.cittadinanzaattivamilano.workers.dev"; /* indirizzo del Worker: dati aggiornati in tempo reale */
+
+(function () {
+  var it = new Intl.NumberFormat("it-IT");
+  var $ = function (id) { return document.getElementById(id); };
+  var el = function (tag, cls, text) {
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text != null) n.textContent = text;
+    return n;
+  };
+
+  function init(D) {
+  var TOTAL = D.TOTAL, UPDATED = D.UPDATED, MUNICIPI = D.MUNICIPI, COMMENTS = D.COMMENTS;
+  $("bars").textContent = "";
+  $("voices").textContent = "";
+  $("filters").textContent = "";
+  $("filters").hidden = true;
+  $("total").textContent = it.format(TOTAL);
+  $("updated").textContent = UPDATED;
+
+  /* Provenienza: una riga per Municipio (al massimo 10), più "Non indicato" */
+  /* Ordine: Municipio 1..9, poi "Non indicato", "Fuori Milano" sempre ultimo */
+  function order(n) {
+    var m = /^Municipio (\d+)$/.exec(n);
+    return m ? +m[1] : (n === "Non indicato" ? 98 : 99);
+  }
+  function byOrder(a, b) { return order(a[0]) - order(b[0]); }
+  var mun = Object.keys(MUNICIPI).map(function (k) { return [k, MUNICIPI[k]]; });
+  var munTotal = mun.reduce(function (s, e) { return s + e[1]; }, 0);
+  var rows = mun.slice();
+  if (TOTAL > munTotal) rows.push(["Non indicato", TOTAL - munTotal, true]);
+  rows.sort(byOrder);
+  rows.forEach(function (r) {
+    var li = el("li", r[2] ? "unk" : null);
+    li.appendChild(el("span", null, r[0]));
+    li.appendChild(el("span", "n", it.format(r[1])));
+    $("bars").appendChild(li);
+  });
+
+  /* Voci: filtro per Municipio, 12 alla volta */
+  var PAGE = 12, filter = null, shown = 0;
+  var grid = $("voices"), moreBtn = $("more"), status = $("status");
+
+  function current() {
+    return filter ? COMMENTS.filter(function (x) { return x.m === filter; }) : COMMENTS;
+  }
+  function card(x) {
+    var q = el("blockquote");
+    q.appendChild(el("p", null, x.t));
+    if (x.m) q.appendChild(el("footer", null, x.m));
+    grid.appendChild(q);
+  }
+  function render(reset) {
+    if (reset) { grid.textContent = ""; shown = 0; }
+    var list = current();
+    list.slice(shown, shown + PAGE).forEach(function (x) { card(x); shown++; });
+    moreBtn.hidden = shown >= list.length;
+    status.textContent = list.length
+      ? "Commenti " + it.format(shown) + " di " + it.format(list.length)
+      : "I primi commenti compariranno qui.";
+  }
+  moreBtn.onclick = function () { render(false); };
+
+  var counts = {};
+  COMMENTS.forEach(function (x) { if (x.m) counts[x.m] = (counts[x.m] || 0) + 1; });
+  var withMun = Object.keys(counts).sort(function (a, b) { return order(a) - order(b); });
+  if (withMun.length > 1) {
+    var box = $("filters"), buttons = [];
+    box.hidden = false;
+    var make = function (label, value) {
+      var b = el("button", "chip", label);
+      b.type = "button";
+      b.setAttribute("aria-pressed", value === null ? "true" : "false");
+      b.addEventListener("click", function () {
+        filter = value;
+        buttons.forEach(function (o) { o.b.setAttribute("aria-pressed", o.v === value ? "true" : "false"); });
+        render(true);
+      });
+      buttons.push({ b: b, v: value });
+      box.appendChild(b);
+    };
+    make("Tutti", null);
+    withMun.forEach(function (m) { make(m + " (" + it.format(counts[m]) + ")", m); });
+  }
+  render(true);
+  }
+
+  init({ TOTAL: TOTAL, UPDATED: UPDATED, MUNICIPI: MUNICIPI, COMMENTS: COMMENTS });
+
+  /* Dati in tempo reale: se il Worker risponde, sostituiscono quelli della pagina */
+  var lastSig = null;
+  function live() {
+    if (!LIVE_URL || !window.fetch) return;
+    fetch(LIVE_URL, { cache: "no-store" }).then(function (r) { return r.ok ? r.json() : null; }).then(function (d) {
+      if (!d || typeof d.total !== "number") return;
+      var sig = d.total + "|" + d.comments.length + "|" + JSON.stringify(d.municipi);
+      if (sig === lastSig) return;
+      lastSig = sig;
+      init({ TOTAL: d.total, UPDATED: d.updated, MUNICIPI: d.municipi, COMMENTS: d.comments });
+    }).catch(function () {});
+  }
+  live();
+  setInterval(live, 60000);
+})();
+</script>
+</body>
+</html>
