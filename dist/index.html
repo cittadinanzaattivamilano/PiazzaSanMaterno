@@ -8,17 +8,16 @@
 <meta name="description" content="Le firme dei cittadini a favore della piazza pedonale a San Materno, nel centro del Casoretto.">
 <meta property="og:title" content="Una piazza a San Materno">
 <meta property="og:description" content="Le firme dei cittadini a favore della piazza pedonale a San Materno, nel centro del Casoretto.">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
 <style>
   /* ---------- Sistema ----------
      Identita' CAMI: blu #1C44FF su bianco, spigoli vivi.
      Spazio: multipli di 8. Griglia: 4 colonne su telefono, 12 da tablet in su.
-     Tipografia: Hanken Grotesk 800 per titoli e numeri, Source Serif 4 per i testi.
+     Tipografia: Helvetica Neue (Helvetica/Arial) ovunque, peso 400 e 700.
      Scala: 15 caption / 18-20 testo / 22-26 lead / 32-44 titolo sezione / 40-88 titolo pagina / 120-260 numero. */
   :root {
-    --blue: #1c44ff; --blue-deep: #0f2fd1; --blue-soft: #e8ecff; --blue-line: #c6d0ff; --ink: #1c44ff; --muted: #2740c8;
-    --display: "Hanken Grotesk", "Helvetica Neue", Arial, sans-serif;
-    --text: "Source Serif 4", Georgia, "Times New Roman", serif;
+    --blue: #1c44ff;
+    --display: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --text: "Helvetica Neue", Helvetica, Arial, sans-serif;
     --u: 8px;
     --gutter: 16px;          /* margine laterale e distanza tra colonne */
     --section: 64px;         /* respiro tra sezioni */
@@ -31,13 +30,13 @@
   * { box-sizing: border-box; }
   html { -webkit-text-size-adjust: 100%; }
   body {
-    margin: 0; background: #fff; color: var(--ink);
+    margin: 0; background: #fff; color: var(--blue);
     font-family: var(--text); font-size: var(--t-body); line-height: 1.55;
     padding-left: max(var(--gutter), env(safe-area-inset-left)); padding-right: max(var(--gutter), env(safe-area-inset-right));
   }
   a { color: var(--blue); text-underline-offset: 3px; }
   a:focus-visible, button:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
-  strong { font-weight: 600; }
+  strong { font-weight: 700; }
 
   /* Griglia: 4 colonne, 12 da 768px */
   .wrap { max-width: 1080px; margin: 0 auto; display: flex; flex-direction: column; gap: var(--section); padding-bottom: 64px; }
@@ -47,28 +46,28 @@
 
   /* Testata */
   .top { display: flex; justify-content: space-between; gap: var(--u) var(--gutter); flex-wrap: wrap; align-items: baseline;
-         padding: calc(var(--u) * 2) 0 calc(var(--u) * 2); border-bottom: 1px solid var(--blue-line);
-         font-family: var(--display); font-size: var(--t-caption); line-height: 1.3; color: var(--muted); font-weight: 500; }
-  .top b { color: var(--blue); font-weight: 800; }
+         padding: calc(var(--u) * 2) 0 calc(var(--u) * 2); border-bottom: 1px solid var(--blue);
+         font-family: var(--display); font-size: var(--t-caption); line-height: 1.3; color: var(--blue); font-weight: 400; }
+  .top b { color: var(--blue); font-weight: 700; }
 
   /* Titoli e testi */
-  h1, h2 { font-family: var(--display); font-weight: 800; margin: 0; text-wrap: balance; }
+  h1, h2 { font-family: var(--display); font-weight: 700; margin: 0; text-wrap: balance; }
   h1 { font-size: var(--t-h1); line-height: .98; letter-spacing: -.04em; }
   h2 { font-size: var(--t-h2); line-height: 1.04; letter-spacing: -.03em; }
   p { margin: 0 0 calc(var(--u) * 2); }
   p:last-child { margin-bottom: 0; }
   .lead { font-size: var(--t-lead); line-height: 1.38; max-width: 34ch; }
-  .meta { font-family: var(--display); font-size: var(--t-caption); line-height: 1.4; font-weight: 500; color: var(--muted); }
+  .meta { font-family: var(--display); font-size: var(--t-caption); line-height: 1.4; font-weight: 400; color: var(--blue); }
 
   /* Pulsanti */
   .cta {
     display: block; text-align: center; background: var(--blue); color: #fff; text-decoration: none;
-    font-family: var(--display); font-weight: 800; font-size: 22px; line-height: 1.15; letter-spacing: -.01em;
+    font-family: var(--display); font-weight: 700; font-size: 22px; line-height: 1.15; letter-spacing: -.01em;
     padding: calc(var(--u) * 2.5) calc(var(--u) * 3); border: 2px solid var(--blue); border-radius: 0; cursor: pointer;
   }
-  .cta:hover { background: var(--blue-deep); border-color: var(--blue-deep); }
+  .cta:hover { background: #fff; color: var(--blue); }
   .cta-alt { background: #fff; color: var(--blue); }
-  .cta-alt:hover { background: var(--blue-soft); border-color: var(--blue); }
+  .cta-alt:hover { background: var(--blue); color: #fff; }
   @media (min-width: 768px) { .cta { display: inline-block; min-width: 320px; } }
 
   /* 1. Apertura */
@@ -85,8 +84,8 @@
 
   /* 2. Il numero: e' il gesto tipografico della pagina */
   .count { align-items: end; row-gap: calc(var(--u) * 2); }
-  .num { font-family: var(--display); font-weight: 800; font-size: var(--t-num); line-height: .76; letter-spacing: -.06em; color: var(--blue); font-variant-numeric: tabular-nums; margin: 0; padding-top: calc(var(--u) * 1.5); }
-  .num-label { font-family: var(--display); font-weight: 800; font-size: 28px; line-height: 1.1; letter-spacing: -.02em; margin: 0 0 var(--u); }
+  .num { font-family: var(--display); font-weight: 700; font-size: var(--t-num); line-height: .76; letter-spacing: -.06em; color: var(--blue); font-variant-numeric: tabular-nums; margin: 0; padding-top: calc(var(--u) * 1.5); }
+  .num-label { font-family: var(--display); font-weight: 700; font-size: 28px; line-height: 1.1; letter-spacing: -.02em; margin: 0 0 var(--u); }
   @media (min-width: 768px) {
     .num { grid-column: 1 / 8; }
     .count .num-meta { grid-column: 8 / 13; padding-bottom: var(--u); }
@@ -104,15 +103,16 @@
   .story .body p:first-child { font-size: var(--t-lead); line-height: 1.38; margin-bottom: calc(var(--u) * 3); }
 
   /* Municipi: elenco con numero di firme; ogni riga filtra i commenti */
-  .hint { font-family: var(--display); font-size: var(--t-caption); font-weight: 500; line-height: 1.4; color: var(--muted); margin: 0 0 calc(var(--u) * 2); }
+  .hint { font-family: var(--display); font-size: var(--t-caption); font-weight: 400; line-height: 1.4; color: var(--blue); margin: 0 0 calc(var(--u) * 2); }
   .tiles { list-style: none; margin: 0 0 calc(var(--u) * 4); padding: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--u); }
   .tile {
     display: flex; align-items: stretch; justify-content: space-between; width: 100%; min-height: 56px; padding: 0; margin: 0;
     border: 2px solid var(--blue); border-radius: 0; background: #fff; color: var(--blue); text-align: left; min-width: 0;
-    font-family: var(--display); font-weight: 800; font-size: 17px; line-height: 1.15;
+    font-family: var(--display); font-weight: 700; font-size: 17px; line-height: 1.15;
   }
   button.tile { cursor: pointer; }
-  button.tile:hover { background: var(--blue-soft); }
+  button.tile:hover { background: var(--blue); color: #fff; }
+  button.tile:hover .n { background: #fff; color: var(--blue); }
   .tile .t { display: flex; align-items: center; padding: var(--u) var(--u) var(--u) calc(var(--u) * 1.5); min-width: 0; }
   .tile .n { flex: none; min-width: 52px; padding: 0 var(--u); display: flex; align-items: center; justify-content: center; background: var(--blue); color: #fff; font-size: 24px; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
   .tile[aria-pressed="true"] { background: var(--blue); color: #fff; }
@@ -120,20 +120,20 @@
   .tile.unk { border-style: dashed; }
 
   /* Commenti */
-  .selinfo { margin: 0 0 calc(var(--u) * 2); display: flex; gap: calc(var(--u) * 1.5); align-items: center; flex-wrap: wrap; font-family: var(--display); font-weight: 800; font-size: 18px; }
+  .selinfo { margin: 0 0 calc(var(--u) * 2); display: flex; gap: calc(var(--u) * 1.5); align-items: center; flex-wrap: wrap; font-family: var(--display); font-weight: 700; font-size: 18px; }
   .selinfo[hidden] { display: none; }
   .selinfo button, .more {
-    font: 800 16px/1 var(--display); color: var(--blue); background: #fff; border: 2px solid var(--blue); border-radius: 0;
+    font: 700 16px/1 var(--display); color: var(--blue); background: #fff; border: 2px solid var(--blue); border-radius: 0;
     padding: calc(var(--u) * 1.5) calc(var(--u) * 2); min-height: 48px; cursor: pointer;
   }
-  .selinfo button:hover, .more:hover { background: var(--blue-soft); }
+  .selinfo button:hover, .more:hover { background: var(--blue); color: #fff; }
   .voices { display: grid; grid-template-columns: 1fr; gap: var(--u); }
   blockquote { margin: 0; padding: calc(var(--u) * 2.5) calc(var(--u) * 2.5) calc(var(--u) * 2); border: 2px solid var(--blue); display: flex; flex-direction: column; justify-content: space-between; gap: calc(var(--u) * 2); min-width: 0; }
   blockquote p { margin: 0; font-size: 19px; line-height: 1.45; overflow-wrap: anywhere; }
-  blockquote footer { font-family: var(--display); font-weight: 800; font-size: var(--t-caption); letter-spacing: .02em; }
+  blockquote footer { font-family: var(--display); font-weight: 700; font-size: var(--t-caption); letter-spacing: .02em; }
   .more-row { display: flex; align-items: center; gap: calc(var(--u) * 2); flex-wrap: wrap; margin-top: calc(var(--u) * 2); }
-  .status { font-family: var(--display); font-size: var(--t-caption); font-weight: 500; color: var(--muted); }
-  .note { margin: calc(var(--u) * 3) 0 0; font-family: var(--display); font-size: var(--t-caption); font-weight: 500; line-height: 1.4; color: var(--muted); max-width: 58ch; }
+  .status { font-family: var(--display); font-size: var(--t-caption); font-weight: 400; color: var(--blue); }
+  .note { margin: calc(var(--u) * 3) 0 0; font-family: var(--display); font-size: var(--t-caption); font-weight: 400; line-height: 1.4; color: var(--blue); max-width: 58ch; }
   @media (min-width: 768px) {
     .tiles { grid-template-columns: repeat(3, 1fr); }
     .voices { grid-template-columns: 1fr 1fr; align-items: stretch; }
@@ -142,12 +142,12 @@
   /* Chiusura e aggiornamenti */
   .close .body p, .follow .body p { max-width: 44ch; margin-bottom: calc(var(--u) * 3); }
 
-  .foot { border-top: 1px solid var(--blue-line); padding-top: calc(var(--u) * 3); font-family: var(--display); font-size: var(--t-caption); line-height: 1.55; font-weight: 500; color: var(--muted); }
+  .foot { border-top: 1px solid var(--blue); padding-top: calc(var(--u) * 3); font-family: var(--display); font-size: var(--t-caption); line-height: 1.55; font-weight: 400; color: var(--blue); }
   .foot p { margin: 0 0 var(--u); max-width: 64ch; }
   @media (min-width: 768px) { .foot .a { grid-column: 1 / 5; } .foot .b { grid-column: 5 / 13; } }
 
   /* Barra di firma, solo quando il pulsante principale non si vede */
-  .sticky { position: fixed; left: 0; right: 0; bottom: 0; z-index: 10; padding: var(--u) max(var(--gutter), env(safe-area-inset-left)) max(var(--u), env(safe-area-inset-bottom)); background: rgba(255,255,255,.97); border-top: 2px solid var(--blue); }
+  .sticky { position: fixed; left: 0; right: 0; bottom: 0; z-index: 10; padding: var(--u) max(var(--gutter), env(safe-area-inset-left)) max(var(--u), env(safe-area-inset-bottom)); background: #fff; border-top: 2px solid var(--blue); }
   .sticky .cta { display: block; max-width: 1080px; margin: 0 auto; padding: calc(var(--u) * 2); font-size: 21px; min-width: 0; }
   body.has-sticky { padding-bottom: 88px; }
 
