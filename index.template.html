@@ -166,7 +166,7 @@
     .hero .count .meta, .hero .act .meta { font-size: 13px; line-height: 1.35; }
     .hero .act .meta { margin-top: var(--u); }
     .meta, .hint, .foot, .foot p { font-size: 13px; }
-    .tile .t, .tile .n { font-size: 16px; }
+    .tiles, .selinfo, .desk { display: none !important; }
     blockquote .m, blockquote cite, blockquote footer { font-size: 13px; }
   }
 
@@ -212,7 +212,7 @@
   <section class="sec voices-grid grid">
     <h2>Le voci dei cittadini</h2>
     <div class="body">
-      <p class="hint">I commenti di chi ha firmato, divisi per Municipio. Tocca un riquadro per leggerli.</p>
+      <p class="hint">I commenti di chi ha firmato<span class="desk">, divisi per Municipio. Tocca un riquadro per leggerli</span>.</p>
       <ul class="tiles" id="bars"></ul>
       <p class="selinfo" id="selinfo" hidden><span id="selname"></span><button type="button" id="reset">Mostra tutti</button></p>
       <div class="voices" id="voices"></div>
