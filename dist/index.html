@@ -88,6 +88,7 @@
   .num-label { font-size: 28px; line-height: 1.1; font-weight: 700; letter-spacing: -.02em; margin: 0 0 var(--u); }
   @media (min-width: 768px) {
     .count { grid-column: 8 / 13; grid-row: 1 / span 3; align-self: end; margin-top: 0; padding-bottom: var(--u); }
+    .num { line-height: .72; padding-top: 0; margin-bottom: calc(var(--u) * 3); white-space: nowrap; }
     .num-label { font-size: 32px; }
   }
 
@@ -169,7 +170,7 @@
       <p class="meta">Ci vogliono meno di 30 secondi.</p>
     </div>
     <div class="count" aria-label="Firme raccolte">
-      <p class="num" id="total">6</p>
+      <p class="num" id="num"><span id="total">6</span></p>
       <p class="num-label">cittadini hanno già firmato</p>
       <p class="meta">Aggiornato al <span id="updated">30 ottobre 2026</span>. Le firme saranno consegnate al Comune di Milano.</p>
     </div>
@@ -247,6 +248,24 @@ var LIVE_URL = "https://piazza-san-matern.cittadinanzaattivamilano.workers.dev";
     var m = /^Municipio (\d+)$/.exec(n);
     return m ? +m[1] : (n === "Non indicato" ? 98 : 99);
   }
+
+  /* Da 768px il numero occupa tutta l'altezza del blocco di sinistra: la sua cima allinea il titolo,
+     la base del testo sotto di lui allinea il pulsante. Se le cifre sono tante, si restringe per stare nella colonna. */
+  var CAP = 0.72; /* altezza delle cifre rispetto al corpo */
+  function fit() {
+    var num = $("num"), wrap = document.querySelector(".count");
+    if (!num || !wrap) return;
+    num.style.fontSize = "";
+    if (!window.matchMedia("(min-width: 768px)").matches) return;
+    var h1 = document.querySelector(".hero h1"), act = document.querySelector(".hero .act");
+    var rest = wrap.querySelector(".num-label").offsetHeight + wrap.querySelector(".meta").offsetHeight + 8 + 24;
+    var H = act.getBoundingClientRect().bottom - h1.getBoundingClientRect().top;
+    var f = Math.max(80, (H - rest) / CAP);
+    num.style.fontSize = f + "px";
+    var w = $("total").getBoundingClientRect().width, W = wrap.clientWidth;
+    if (w > W * 0.96) num.style.fontSize = (f * W * 0.96 / w) + "px";
+  }
+  window.addEventListener("resize", fit);
   var selected = null; /* Municipio scelto: resta anche quando arrivano dati nuovi */
 
   function init(D) {
@@ -309,6 +328,7 @@ var LIVE_URL = "https://piazza-san-matern.cittadinanzaattivamilano.workers.dev";
     $("reset").onclick = function () { selected = null; mark(); render(true); };
     mark();
     render(true);
+    fit();
   }
 
   init({ TOTAL: TOTAL, UPDATED: UPDATED, MUNICIPI: MUNICIPI, COMMENTS: COMMENTS });
