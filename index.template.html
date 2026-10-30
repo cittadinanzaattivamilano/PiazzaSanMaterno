@@ -133,11 +133,14 @@
   /* Commenti */
   .selinfo { margin: 0 0 calc(var(--u) * 2); display: flex; gap: calc(var(--u) * 1.5); align-items: center; flex-wrap: wrap; font-family: var(--display); font-weight: 700; font-size: 18px; }
   .selinfo[hidden] { display: none; }
-  .selinfo button, .more {
+  .more {
     font: 700 16px/1 var(--display); color: var(--blue); background: #fff; border: 2px solid var(--blue); border-radius: 0;
     padding: calc(var(--u) * 1.5) calc(var(--u) * 2); min-height: 48px; cursor: pointer;
   }
-  .selinfo button:hover, .more:hover { background: var(--blue); color: #fff; }
+  .more:hover { background: var(--blue); color: #fff; }
+  .selinfo { margin-bottom: calc(var(--u) * 2); padding-bottom: var(--u); border-bottom: 1px solid var(--blue); justify-content: space-between; }
+  .selinfo button { border: 0; background: none; padding: 0; min-height: 0; font: 400 16px/1.2 var(--display); color: var(--blue); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+  .selinfo button:hover { text-decoration-thickness: 2px; }
   .voices { display: grid; grid-template-columns: 1fr; gap: var(--u); }
   blockquote { margin: 0; padding: calc(var(--u) * 2) calc(var(--u) * 2) calc(var(--u) * 1.5); border: 2px solid var(--blue); display: flex; flex-direction: column; justify-content: space-between; gap: calc(var(--u) * 2); min-width: 0; }
   blockquote p { margin: 0; font-size: 17px; line-height: 1.45; overflow-wrap: anywhere; }
@@ -217,7 +220,7 @@
     <div class="body">
       <p class="hint">I commenti di chi ha firmato<span class="desk">, divisi per Municipio. Tocca un riquadro per leggerli</span>.</p>
       <ul class="tiles" id="bars"></ul>
-      <p class="selinfo" id="selinfo" hidden><span id="selname"></span><button type="button" id="reset">Mostra tutti</button></p>
+      <p class="selinfo" id="selinfo" hidden><span id="selname"></span><button type="button" id="reset">Mostra tutti ×</button></p>
       <div class="voices" id="voices"></div>
       <div class="more-row">
         <button class="more" id="more" type="button" hidden>Mostra altri commenti</button>
