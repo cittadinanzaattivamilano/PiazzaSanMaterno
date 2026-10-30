@@ -111,7 +111,9 @@
   @media (min-width: 768px) { .story .body p:first-child { font-size: var(--t-lead); line-height: 1.38; } }
 
   /* Municipi: elenco con numero di firme; ogni riga filtra i commenti */
-  .sub { display: none; }
+  .sub { display: block; margin-top: var(--u); font-size: 13px; font-weight: 400; line-height: 1.35; letter-spacing: 0; }
+  .hint { display: none; }
+  @media (min-width: 768px) { .sub { font-size: 18px; line-height: 1.4; margin-top: calc(var(--u) * 1.5); } }
   .hint { font-family: var(--display); font-size: 16px; font-weight: 400; line-height: 1.4; color: var(--blue); margin: 0 0 calc(var(--u) * 2); }
   .tiles { list-style: none; margin: 0 0 calc(var(--u) * 4); padding: 0; display: grid; grid-template-columns: 1fr; gap: var(--u); }
   .tile {
@@ -167,8 +169,7 @@
     .hero .count .meta, .hero .act .meta { font-size: 13px; line-height: 1.35; }
     .hero .act .meta { margin-top: var(--u); }
     .meta, .hint, .foot, .foot p { font-size: 13px; }
-    .tiles, .selinfo, .desk, .hint { display: none !important; }
-    .sec > h2 .sub { display: block; margin-top: var(--u); font-size: 13px; font-weight: 400; line-height: 1.35; letter-spacing: 0; }
+    .tiles, .selinfo { display: none !important; }
     blockquote .m, blockquote cite, blockquote footer { font-size: 13px; }
   }
 
