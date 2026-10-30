@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
   schedule:
-    - cron: "*/10 * * * *"   # ogni 10 minuti
+    - cron: "*/5 * * * *"    # ogni 5 minuti (il minimo di GitHub)
   workflow_dispatch:
   repository_dispatch:
     types: [tally-submission]   # segnale istantaneo da Tally (via Make, Zapier o n8n)
