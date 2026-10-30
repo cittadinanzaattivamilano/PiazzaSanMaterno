@@ -68,14 +68,20 @@
   }
   .note { margin: 16px 0 0; font-size: 15px; color: var(--muted); }
 
-  /* Provenienza per Municipio: al massimo 10 righe sottili */
-  .bars { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 5px; }
-  .bars li { display: grid; grid-template-columns: 112px 1fr 44px; gap: 12px; align-items: center; min-width: 0; font-family: var(--display); font-weight: 700; font-size: 15px; font-variant-numeric: tabular-nums; }
-  .bars .track { height: 10px; background: var(--blue-soft); }
-  .bars .fill { display: block; height: 100%; background: var(--blue); }
-  .bars .unk .fill { background: #bcc8ff; }
-  .bars .n { text-align: right; font-weight: 800; }
-  @media (max-width: 420px) { .bars li { grid-template-columns: 96px 1fr 40px; gap: 8px; } }
+  /* Provenienza per Municipio: riquadri (2 per riga su telefono), nome in blu e numero in un quadrato blu */
+  .tiles { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .tiles li {
+    border: 2px solid var(--blue); min-width: 0; padding: 12px;
+    display: flex; flex-direction: column; justify-content: space-between; gap: 18px;
+    font-family: var(--display); font-weight: 800; font-size: 16px; line-height: 1.15; color: var(--blue);
+  }
+  .tiles .unk { border-style: dashed; }
+  .tiles .n {
+    align-self: flex-end; min-width: 44px; height: 44px; padding: 0 8px;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--blue); color: #ffffff; font-size: 22px; font-variant-numeric: tabular-nums;
+  }
+  @media (min-width: 560px) { .tiles { grid-template-columns: repeat(3, 1fr); gap: 12px; } .tiles li { font-size: 17px; padding: 14px; } }
 
   /* Voci: griglia con filtro per Municipio e "mostra altri" */
   .filters { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 18px; }
@@ -126,8 +132,7 @@
 
   <section>
     <h2>Da dove arrivano</h2>
-    <ul class="bars" id="bars"></ul>
-    <p class="note" id="mun-note"></p>
+    <ul class="tiles" id="bars"></ul>
   </section>
 
   <section>
@@ -165,7 +170,6 @@
 var UPDATED = "30 ottobre 2026";
 var TOTAL = 6;
 var MUNICIPI = {"Municipio 3":2,"Municipio 2":1,"Municipio 4":1,"Municipio 7":1,"Fuori Milano":1};
-var MUN_ESTIMATE = true; /* le prime firme hanno il Municipio stimato dal CAP */
 var COMMENTS = [{"m":"Municipio 3","e":true,"ok":true,"t":"Perché il quartiere ha bisogno di più aree pedonali e meno di parcheggi.  Sarà uno spazio che renderà il quartiere più bello e favorirà la socialità!"},{"m":"Municipio 2","e":true,"ok":false,"t":"Perché è un piccolo tassello in più per costruire una città a misura di persone e non al servizio dell'ideologia dell'automobile a tutti i costi."},{"m":"Municipio 3","e":true,"ok":false,"t":"Sono cresciuto in via Ampère e andato all'oratorio Casoretto per 15 anni. È sempre stato un punto dolente la strada subito fuori dal cancello dell'ingresso, per la quantità di bambini che si muovono nelle vicinanze. Inoltre la facciata della chiesa è bellissima e sarebbe bello poterne godere con delle panchine"},{"m":"Municipio 7","e":true,"ok":false,"t":"perché serve distribuire meglio lo spazio in città!"},{"m":"Fuori Milano","e":true,"ok":false,"t":"Perche lo spazio pubblico dedicato alle persone è troppo poco rispetto a quello dedicato alle auto, nella città con i migliori mezzi pubblici in Italia"}];
 
 var LIVE_URL = "https://piazza-san-matern.cittadinanzaattivamilano.workers.dev"; /* indirizzo del Worker: dati aggiornati in tempo reale */
@@ -181,7 +185,7 @@ var LIVE_URL = "https://piazza-san-matern.cittadinanzaattivamilano.workers.dev";
   };
 
   function init(D) {
-  var TOTAL = D.TOTAL, UPDATED = D.UPDATED, MUNICIPI = D.MUNICIPI, COMMENTS = D.COMMENTS, MUN_ESTIMATE = D.MUN_ESTIMATE;
+  var TOTAL = D.TOTAL, UPDATED = D.UPDATED, MUNICIPI = D.MUNICIPI, COMMENTS = D.COMMENTS;
   $("bars").textContent = "";
   $("voices").textContent = "";
   $("filters").textContent = "";
@@ -201,20 +205,12 @@ var LIVE_URL = "https://piazza-san-matern.cittadinanzaattivamilano.workers.dev";
   var rows = mun.slice();
   if (TOTAL > munTotal) rows.push(["Non indicato", TOTAL - munTotal, true]);
   rows.sort(byOrder);
-  var peak = rows.length ? Math.max.apply(null, rows.map(function (r) { return r[1]; })) : 1;
   rows.forEach(function (r) {
     var li = el("li", r[2] ? "unk" : null);
     li.appendChild(el("span", null, r[0]));
-    var track = el("span", "track"), fill = el("span", "fill");
-    fill.style.width = Math.max(3, Math.round(r[1] / peak * 100)) + "%";
-    track.appendChild(fill);
-    li.appendChild(track);
     li.appendChild(el("span", "n", it.format(r[1])));
     $("bars").appendChild(li);
   });
-  $("mun-note").textContent = MUN_ESTIMATE
-    ? "Stima: per le prime firme il Municipio \u00e8 ricavato dal CAP di residenza, che pu\u00f2 coprire pi\u00f9 Municipi. Le nuove firme lo indicano direttamente."
-    : (munTotal ? it.format(munTotal) + " firme su " + it.format(TOTAL) + " indicano il Municipio." : "");
 
   /* Voci: filtro per Municipio, 12 alla volta */
   var PAGE = 12, filter = null, shown = 0;
@@ -226,7 +222,7 @@ var LIVE_URL = "https://piazza-san-matern.cittadinanzaattivamilano.workers.dev";
   function card(x) {
     var q = el("blockquote");
     q.appendChild(el("p", null, x.t));
-    if (x.m) q.appendChild(el("footer", null, x.m + (x.e ? " \u00b7 stima" : "")));
+    if (x.m) q.appendChild(el("footer", null, x.m));
     grid.appendChild(q);
   }
   function render(reset) {
@@ -264,7 +260,7 @@ var LIVE_URL = "https://piazza-san-matern.cittadinanzaattivamilano.workers.dev";
   render(true);
   }
 
-  init({ TOTAL: TOTAL, UPDATED: UPDATED, MUNICIPI: MUNICIPI, COMMENTS: COMMENTS, MUN_ESTIMATE: MUN_ESTIMATE });
+  init({ TOTAL: TOTAL, UPDATED: UPDATED, MUNICIPI: MUNICIPI, COMMENTS: COMMENTS });
 
   /* Dati in tempo reale: se il Worker risponde, sostituiscono quelli della pagina */
   var lastSig = null;
@@ -275,7 +271,7 @@ var LIVE_URL = "https://piazza-san-matern.cittadinanzaattivamilano.workers.dev";
       var sig = d.total + "|" + d.comments.length + "|" + JSON.stringify(d.municipi);
       if (sig === lastSig) return;
       lastSig = sig;
-      init({ TOTAL: d.total, UPDATED: d.updated, MUNICIPI: d.municipi, COMMENTS: d.comments, MUN_ESTIMATE: true });
+      init({ TOTAL: d.total, UPDATED: d.updated, MUNICIPI: d.municipi, COMMENTS: d.comments });
     }).catch(function () {});
   }
   live();

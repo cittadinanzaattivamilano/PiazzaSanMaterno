@@ -4,7 +4,7 @@ import fs from "node:fs";
 
 const FORM_ID = "5XXDl6";
 // Firme arrivate dopo questa data usano il modulo nuovo (Municipio, senza CAP).
-// Quelle precedenti sono in data/legacy.json, con il Municipio stimato dal CAP.
+// Quelle precedenti sono in data/legacy.json.
 const CUTOFF = Date.parse("2026-10-30T13:32:00Z");
 const MAX_COMMENT = 1200;
 
@@ -98,7 +98,6 @@ function build({ subs, questions }) {
   return `var UPDATED = ${JSON.stringify(fmt.format(new Date()))};
 var TOTAL = ${total};
 var MUNICIPI = ${JSON.stringify(mun)};
-var MUN_ESTIMATE = true; /* le prime firme hanno il Municipio stimato dal CAP */
 var COMMENTS = ${JSON.stringify([...comments.reverse(), ...legacy.comments])};`;
 }
 
