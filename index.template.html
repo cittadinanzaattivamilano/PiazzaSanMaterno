@@ -111,6 +111,7 @@
   @media (min-width: 768px) { .story .body p:first-child { font-size: var(--t-lead); line-height: 1.38; } }
 
   /* Municipi: elenco con numero di firme; ogni riga filtra i commenti */
+  .sub { display: none; }
   .hint { font-family: var(--display); font-size: 16px; font-weight: 400; line-height: 1.4; color: var(--blue); margin: 0 0 calc(var(--u) * 2); }
   .tiles { list-style: none; margin: 0 0 calc(var(--u) * 4); padding: 0; display: grid; grid-template-columns: 1fr; gap: var(--u); }
   .tile {
@@ -166,7 +167,8 @@
     .hero .count .meta, .hero .act .meta { font-size: 13px; line-height: 1.35; }
     .hero .act .meta { margin-top: var(--u); }
     .meta, .hint, .foot, .foot p { font-size: 13px; }
-    .tiles, .selinfo, .desk { display: none !important; }
+    .tiles, .selinfo, .desk, .hint { display: none !important; }
+    .sec > h2 .sub { display: block; margin-top: var(--u); font-size: 13px; font-weight: 400; line-height: 1.35; letter-spacing: 0; }
     blockquote .m, blockquote cite, blockquote footer { font-size: 13px; }
   }
 
@@ -210,7 +212,7 @@
   </section>
 
   <section class="sec voices-grid grid">
-    <h2>Le voci dei cittadini</h2>
+    <h2>Le voci dei cittadini<span class="sub">I commenti di chi ha firmato</span></h2>
     <div class="body">
       <p class="hint">I commenti di chi ha firmato<span class="desk">, divisi per Municipio. Tocca un riquadro per leggerli</span>.</p>
       <ul class="tiles" id="bars"></ul>
