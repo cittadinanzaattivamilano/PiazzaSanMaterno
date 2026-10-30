@@ -6,181 +6,222 @@
 <meta name="theme-color" content="#1c44ff">
 <title>Una piazza a San Materno</title>
 <meta name="description" content="Le firme dei cittadini a favore della piazza pedonale a San Materno, nel centro del Casoretto.">
+<meta property="og:title" content="Una piazza a San Materno">
+<meta property="og:description" content="Le firme dei cittadini a favore della piazza pedonale a San Materno, nel centro del Casoretto.">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
 <style>
-  /* Layout: una colonna editoriale su bianco. Il numero delle firme apre la pagina, poi provenienza, voci, progetto.
-     Identità CAMI: tutto blu #1C44FF su bianco. Font di marca (Forma DJR, Publico) sostituiti da equivalenti Google.
-     I numeri sono tutti calcolati dai dati in fondo alla pagina (TOTAL, MUNICIPI e COMMENTS): per aggiornare basta cambiare quelli. */
+  /* ---------- Sistema ----------
+     Identita' CAMI: blu #1C44FF su bianco, spigoli vivi.
+     Spazio: multipli di 8. Griglia: 4 colonne su telefono, 12 da tablet in su.
+     Tipografia: Hanken Grotesk 800 per titoli e numeri, Source Serif 4 per i testi.
+     Scala: 15 caption / 18-20 testo / 22-26 lead / 32-44 titolo sezione / 40-88 titolo pagina / 120-260 numero. */
   :root {
-    --bg: #ffffff;
-    --fg: #1c44ff;
-    --muted: #3a58ff;
-    --line: #c6d0ff;
-    --blue: #1c44ff;
-    --blue-soft: #e3e8ff;
+    --blue: #1c44ff; --blue-deep: #0f2fd1; --blue-soft: #e8ecff; --blue-line: #c6d0ff; --ink: #1c44ff; --muted: #2740c8;
     --display: "Hanken Grotesk", "Helvetica Neue", Arial, sans-serif;
     --text: "Source Serif 4", Georgia, "Times New Roman", serif;
+    --u: 8px;
+    --gutter: 16px;          /* margine laterale e distanza tra colonne */
+    --section: 64px;         /* respiro tra sezioni */
+    --t-caption: 15px; --t-body: 18px; --t-lead: 22px; --t-h2: 34px; --t-h1: clamp(42px, 12vw, 64px); --t-num: clamp(132px, 40vw, 200px);
     color-scheme: light;
   }
+  @media (min-width: 768px) {
+    :root { --gutter: 24px; --section: 112px; --t-body: 19px; --t-lead: 26px; --t-h2: 44px; --t-h1: clamp(64px, 8vw, 88px); --t-num: clamp(200px, 24vw, 280px); }
+  }
   * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
   body {
-    margin: 0;
-    background: var(--bg);
-    color: var(--fg);
-    font-family: var(--text);
-    font-size: 18px;
-    line-height: 1.55;
-    padding-block: 16px 40px;
-    padding-left: max(16px, env(safe-area-inset-left, 0px));
-    padding-right: max(16px, env(safe-area-inset-right, 0px));
+    margin: 0; background: #fff; color: var(--ink);
+    font-family: var(--text); font-size: var(--t-body); line-height: 1.55;
+    padding-left: max(var(--gutter), env(safe-area-inset-left)); padding-right: max(var(--gutter), env(safe-area-inset-right));
   }
-  .wrap { max-width: 680px; margin: 0 auto; display: flex; flex-direction: column; gap: 36px; }
-  a { color: var(--fg); text-underline-offset: 3px; }
-  a:focus-visible, .cta:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid var(--fg); outline-offset: 3px; }
+  a { color: var(--blue); text-underline-offset: 3px; }
+  a:focus-visible, button:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
+  strong { font-weight: 600; }
 
-  .top {
-    display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap;
-    font-family: var(--display); font-weight: 500; font-size: 14px; color: var(--muted);
-    border-bottom: 1px solid var(--line); padding-bottom: 14px;
-  }
+  /* Griglia: 4 colonne, 12 da 768px */
+  .wrap { max-width: 1080px; margin: 0 auto; display: flex; flex-direction: column; gap: var(--section); padding-bottom: 64px; }
+  .grid { display: grid; grid-template-columns: repeat(4, 1fr); column-gap: var(--gutter); row-gap: calc(var(--u) * 3); }
+  .grid > * { grid-column: 1 / -1; min-width: 0; }
+  @media (min-width: 768px) { .grid { grid-template-columns: repeat(12, 1fr); } }
+
+  /* Testata */
+  .top { display: flex; justify-content: space-between; gap: var(--u) var(--gutter); flex-wrap: wrap; align-items: baseline;
+         padding: calc(var(--u) * 2) 0 calc(var(--u) * 2); border-bottom: 1px solid var(--blue-line);
+         font-family: var(--display); font-size: var(--t-caption); line-height: 1.3; color: var(--muted); font-weight: 500; }
   .top b { color: var(--blue); font-weight: 800; }
 
-  h1 {
-    font-family: var(--display); font-weight: 800;
-    font-size: clamp(38px, 10.5vw, 64px); line-height: 1; letter-spacing: -.03em;
-    margin: 0 0 14px; text-wrap: balance;
-  }
-  .lead { margin: 0; color: var(--muted); max-width: 52ch; }
+  /* Titoli e testi */
+  h1, h2 { font-family: var(--display); font-weight: 800; margin: 0; text-wrap: balance; }
+  h1 { font-size: var(--t-h1); line-height: .98; letter-spacing: -.04em; }
+  h2 { font-size: var(--t-h2); line-height: 1.04; letter-spacing: -.03em; }
+  p { margin: 0 0 calc(var(--u) * 2); }
+  p:last-child { margin-bottom: 0; }
+  .lead { font-size: var(--t-lead); line-height: 1.38; max-width: 34ch; }
+  .meta { font-family: var(--display); font-size: var(--t-caption); line-height: 1.4; font-weight: 500; color: var(--muted); }
 
-  .count { display: flex; flex-direction: column; gap: 14px; align-items: flex-start; }
-  .num {
-    font-family: var(--display); font-weight: 800; line-height: .8; letter-spacing: -.04em;
-    font-size: clamp(96px, 27vw, 170px); color: var(--blue);
-    font-variant-numeric: tabular-nums; margin: 0;
-  }
-  .num-label { font-family: var(--display); font-weight: 800; font-size: 26px; line-height: 1.15; letter-spacing: -.01em; }
-  .num-label small { display: block; font-family: var(--text); font-weight: 400; font-size: 15px; letter-spacing: 0; color: var(--muted); margin-top: 6px; }
+  /* Pulsanti */
   .cta {
-    display: inline-block; background: var(--blue); color: #ffffff; text-decoration: none;
-    font-family: var(--display); font-weight: 700; font-size: 20px; letter-spacing: -.01em;
-    padding: 14px 26px; border-radius: 2px;
+    display: block; text-align: center; background: var(--blue); color: #fff; text-decoration: none;
+    font-family: var(--display); font-weight: 800; font-size: 22px; line-height: 1.15; letter-spacing: -.01em;
+    padding: calc(var(--u) * 2.5) calc(var(--u) * 3); border: 2px solid var(--blue); border-radius: 0; cursor: pointer;
   }
-  .cta:hover { background: #0f2fd1; }
+  .cta:hover { background: var(--blue-deep); border-color: var(--blue-deep); }
+  .cta-alt { background: #fff; color: var(--blue); }
+  .cta-alt:hover { background: var(--blue-soft); border-color: var(--blue); }
+  @media (min-width: 768px) { .cta { display: inline-block; min-width: 320px; } }
 
-  h2 {
-    font-family: var(--display); font-weight: 800; font-size: 28px; letter-spacing: -.02em; line-height: 1.1;
-    margin: 0 0 14px; padding-top: 12px; border-top: 3px solid var(--fg);
+  /* 1. Apertura */
+  .hero { padding-top: 0; }
+  .hero h1 { margin-bottom: calc(var(--u) * 3); }
+  .hero .lead { margin-bottom: calc(var(--u) * 4); }
+  .hero .meta { margin-top: calc(var(--u) * 1.5); }
+  @media (min-width: 768px) {
+    .hero { padding-top: calc(var(--u) * 6); row-gap: 0; }
+    .hero h1 { grid-column: 1 / 10; margin-bottom: calc(var(--u) * 5); }
+    .hero .lead { grid-column: 1 / 7; margin-bottom: calc(var(--u) * 5); }
+    .hero .act { grid-column: 1 / 7; }
   }
-  .note { margin: 16px 0 0; font-size: 15px; color: var(--muted); }
 
-  /* Municipi: riga con nome a sinistra e quadrato blu col numero di firme a destra. Un tocco filtra i commenti. */
-  .hint { margin: 0 0 14px; font-size: 17px; }
-  .tiles { list-style: none; margin: 0 0 18px; padding: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+  /* 2. Il numero: e' il gesto tipografico della pagina */
+  .count { align-items: end; row-gap: calc(var(--u) * 2); }
+  .num { font-family: var(--display); font-weight: 800; font-size: var(--t-num); line-height: .76; letter-spacing: -.06em; color: var(--blue); font-variant-numeric: tabular-nums; margin: 0; padding-top: calc(var(--u) * 1.5); }
+  .num-label { font-family: var(--display); font-weight: 800; font-size: 28px; line-height: 1.1; letter-spacing: -.02em; margin: 0 0 var(--u); }
+  @media (min-width: 768px) {
+    .num { grid-column: 1 / 8; }
+    .count .num-meta { grid-column: 8 / 13; padding-bottom: var(--u); }
+    .num-label { font-size: 32px; }
+  }
+
+  /* Sezioni con titolo a sinistra e contenuto a destra */
+  .sec { border-top: 3px solid var(--blue); padding-top: calc(var(--u) * 2); }
+  .sec > h2 { margin-bottom: calc(var(--u) * 1); }
+  @media (min-width: 768px) {
+    .sec > h2 { grid-column: 1 / 5; position: sticky; top: calc(var(--u) * 3); align-self: start; margin-bottom: 0; }
+    .sec > .body { grid-column: 5 / 13; }
+  }
+  .story .body p { max-width: 58ch; }
+  .story .body p:first-child { font-size: var(--t-lead); line-height: 1.38; margin-bottom: calc(var(--u) * 3); }
+
+  /* Municipi: elenco con numero di firme; ogni riga filtra i commenti */
+  .hint { font-family: var(--display); font-size: var(--t-caption); font-weight: 500; line-height: 1.4; color: var(--muted); margin: 0 0 calc(var(--u) * 2); }
+  .tiles { list-style: none; margin: 0 0 calc(var(--u) * 4); padding: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--u); }
   .tile {
-    display: flex; align-items: stretch; justify-content: space-between; width: 100%; min-height: 50px; padding: 0; margin: 0;
-    border: 2px solid var(--blue); border-radius: 0; background: #ffffff; color: var(--blue);
-    font: 800 16px/1.15 var(--display); text-align: left; min-width: 0;
+    display: flex; align-items: stretch; justify-content: space-between; width: 100%; min-height: 56px; padding: 0; margin: 0;
+    border: 2px solid var(--blue); border-radius: 0; background: #fff; color: var(--blue); text-align: left; min-width: 0;
+    font-family: var(--display); font-weight: 800; font-size: 17px; line-height: 1.15;
   }
   button.tile { cursor: pointer; }
   button.tile:hover { background: var(--blue-soft); }
-  .tile .t { display: flex; align-items: center; padding: 6px 8px 6px 10px; min-width: 0; }
-  .tile .n { flex: none; min-width: 46px; padding: 0 8px; display: flex; align-items: center; justify-content: center; background: var(--blue); color: #ffffff; font-size: 22px; font-variant-numeric: tabular-nums; }
-  .tile[aria-pressed="true"] { background: var(--blue); color: #ffffff; }
-  .tile[aria-pressed="true"] .n { background: #ffffff; color: var(--blue); }
+  .tile .t { display: flex; align-items: center; padding: var(--u) var(--u) var(--u) calc(var(--u) * 1.5); min-width: 0; }
+  .tile .n { flex: none; min-width: 52px; padding: 0 var(--u); display: flex; align-items: center; justify-content: center; background: var(--blue); color: #fff; font-size: 24px; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+  .tile[aria-pressed="true"] { background: var(--blue); color: #fff; }
+  .tile[aria-pressed="true"] .n { background: #fff; color: var(--blue); }
   .tile.unk { border-style: dashed; }
-  @media (min-width: 560px) { .tiles { grid-template-columns: repeat(3, 1fr); } .tile { font-size: 17px; } }
 
-  /* Commenti: griglia e "mostra altri" */
+  /* Commenti */
+  .selinfo { margin: 0 0 calc(var(--u) * 2); display: flex; gap: calc(var(--u) * 1.5); align-items: center; flex-wrap: wrap; font-family: var(--display); font-weight: 800; font-size: 18px; }
   .selinfo[hidden] { display: none; }
-  .selinfo { margin: 0 0 14px; font-family: var(--display); font-weight: 800; font-size: 17px; display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
-  .selinfo button { font: 700 15px/1 var(--display); color: var(--blue); background: #ffffff; border: 2px solid var(--blue); border-radius: 0; padding: 9px 12px; min-height: 40px; cursor: pointer; }
-  .more { font: 700 16px/1 var(--display); color: #ffffff; background: var(--blue); border: 2px solid var(--blue); padding: 12px 16px; min-height: 48px; cursor: pointer; border-radius: 0; }
-  .voices { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr)); gap: 12px; }
-  blockquote { margin: 0; padding: 16px; border: 2px solid var(--blue); display: flex; flex-direction: column; justify-content: space-between; gap: 14px; min-width: 0; }
-  blockquote p { margin: 0; font-size: 18px; line-height: 1.45; overflow-wrap: anywhere; }
-  blockquote footer { font-family: var(--display); font-weight: 800; font-size: 15px; letter-spacing: .02em; }
-  .more-row { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-top: 18px; }
-  .status { font-size: 15px; color: var(--muted); }
+  .selinfo button, .more {
+    font: 800 16px/1 var(--display); color: var(--blue); background: #fff; border: 2px solid var(--blue); border-radius: 0;
+    padding: calc(var(--u) * 1.5) calc(var(--u) * 2); min-height: 48px; cursor: pointer;
+  }
+  .selinfo button:hover, .more:hover { background: var(--blue-soft); }
+  .voices { display: grid; grid-template-columns: 1fr; gap: var(--u); }
+  blockquote { margin: 0; padding: calc(var(--u) * 2.5) calc(var(--u) * 2.5) calc(var(--u) * 2); border: 2px solid var(--blue); display: flex; flex-direction: column; justify-content: space-between; gap: calc(var(--u) * 2); min-width: 0; }
+  blockquote p { margin: 0; font-size: 19px; line-height: 1.45; overflow-wrap: anywhere; }
+  blockquote footer { font-family: var(--display); font-weight: 800; font-size: var(--t-caption); letter-spacing: .02em; }
+  .more-row { display: flex; align-items: center; gap: calc(var(--u) * 2); flex-wrap: wrap; margin-top: calc(var(--u) * 2); }
+  .status { font-family: var(--display); font-size: var(--t-caption); font-weight: 500; color: var(--muted); }
+  .note { margin: calc(var(--u) * 3) 0 0; font-family: var(--display); font-size: var(--t-caption); font-weight: 500; line-height: 1.4; color: var(--muted); max-width: 58ch; }
+  @media (min-width: 768px) {
+    .tiles { grid-template-columns: repeat(3, 1fr); }
+    .voices { grid-template-columns: 1fr 1fr; align-items: stretch; }
+  }
 
-  .follow p { margin: 0 0 18px; max-width: 52ch; }
-  .follow .cta { max-width: 100%; }
-  .story p { margin: 0 0 16px; max-width: 60ch; }
-  .story p:last-child { margin-bottom: 0; }
-  .story strong { font-weight: 600; }
+  /* Chiusura e aggiornamenti */
+  .close .body p, .follow .body p { max-width: 44ch; margin-bottom: calc(var(--u) * 3); }
 
-  .foot { border-top: 1px solid var(--line); padding-top: 20px; font-size: 14px; line-height: 1.6; color: var(--muted); display: flex; flex-direction: column; gap: 10px; }
-  .foot p { margin: 0; max-width: 64ch; }
-  .foot a { color: var(--fg); }
+  .foot { border-top: 1px solid var(--blue-line); padding-top: calc(var(--u) * 3); font-family: var(--display); font-size: var(--t-caption); line-height: 1.55; font-weight: 500; color: var(--muted); }
+  .foot p { margin: 0 0 var(--u); max-width: 64ch; }
+  @media (min-width: 768px) { .foot .a { grid-column: 1 / 5; } .foot .b { grid-column: 5 / 13; } }
 
+  /* Barra di firma, solo quando il pulsante principale non si vede */
+  .sticky { position: fixed; left: 0; right: 0; bottom: 0; z-index: 10; padding: var(--u) max(var(--gutter), env(safe-area-inset-left)) max(var(--u), env(safe-area-inset-bottom)); background: rgba(255,255,255,.97); border-top: 2px solid var(--blue); }
+  .sticky .cta { display: block; max-width: 1080px; margin: 0 auto; padding: calc(var(--u) * 2); font-size: 21px; min-width: 0; }
+  body.has-sticky { padding-bottom: 88px; }
 
-  /* Landing: pulsante di firma sempre a portata di dito */
-  .cta-main { display: block; text-align: center; font-size: 22px; padding: 20px 24px; margin-top: 22px; }
-  .cta-alt { display: block; text-align: center; background: #ffffff; color: var(--blue); border: 2px solid var(--blue); }
-  .cta-alt:hover { background: var(--blue-soft); }
-  .micro { margin: 10px 0 0; font-size: 16px; color: var(--muted); }
-  .close p { margin: 0; max-width: 52ch; }
-  .sticky { position: fixed; left: 0; right: 0; bottom: 0; z-index: 10; padding: 10px max(16px, env(safe-area-inset-left)) max(10px, env(safe-area-inset-bottom)); background: rgba(255,255,255,.96); border-top: 2px solid var(--blue); }
-  .sticky .cta { display: block; text-align: center; font-size: 21px; padding: 16px; max-width: 680px; margin: 0 auto; }
-  body.has-sticky { padding-bottom: 104px; }
-
-  @media (prefers-reduced-motion: no-preference) { .cta { transition: background .15s; } }
+  @media (prefers-reduced-motion: no-preference) { .cta, .tile { transition: background .15s, color .15s; } }
 </style>
 </head>
 <body>
 <main class="wrap">
 
   <header class="top">
-    <span><b>→ Cittadinanza Attiva Milano</b></span>
+    <b>→ Cittadinanza Attiva Milano</b>
     <span>con Maledette Biciclette Milanesi</span>
   </header>
 
-  <section>
+  <section class="hero grid">
     <h1>Una piazza a San Materno</h1>
     <p class="lead">Al Casoretto, davanti all’abbazia, si può fare una <strong>piazza pedonale per chi vive il quartiere</strong>. Il Comune ha un progetto. Serve anche la tua voce.</p>
-    <a class="cta cta-main" href="https://tally.so/r/5XXDl6">Firma per la piazza →</a>
-    <p class="micro">Ci vogliono meno di 30 secondi.</p>
-  </section>
-
-  <section class="count" aria-label="Firme raccolte">
-    <p class="num" id="total">6</p>
-    <div class="num-label">cittadini hanno già firmato<small>Aggiornato al <span id="updated">30 ottobre 2026</span>. Le firme saranno consegnate al Comune di Milano.</small></div>
-  </section>
-
-  <section class="story">
-    <h2>Perché firmare</h2>
-    <p>Davanti all’abbazia di Santa Maria Bianca della Misericordia <strong>oggi c’è un incrocio</strong>. Il progetto prevede di chiudere al traffico il breve tratto di via Lambrate che sbocca su via Casoretto e di trasformarlo in <strong>uno spazio pedonale: un sagrato per la chiesa</strong>, con panchine, tavolini e fioriere.</p>
-    <p>Non è un’idea nata ieri. Se ne parla dal 2004. Un progetto di sagrato fu approvato nel 2006 dal Consiglio di Zona 3. Nel 2022 il Municipio 3 ha dato parere favorevole e nel 2023 la Giunta ha approvato la pedonalizzazione in forma sperimentale.</p>
-    <p>Chiediamo al Comune e al Municipio 3 di portare avanti il progetto e di accompagnare la piazza con cura, manutenzione e controlli, perché resti uno spazio vissuto da tutti.</p>
-  </section>
-
-  <section>
-    <h2>Le voci dei cittadini</h2>
-    <p class="hint">Firme per Municipio. Tocca un riquadro per leggere i commenti.</p>
-    <ul class="tiles" id="bars"></ul>
-    <p class="selinfo" id="selinfo" hidden><span id="selname"></span><button type="button" id="reset">Mostra tutti</button></p>
-    <div class="voices" id="voices"></div>
-    <div class="more-row">
-      <button class="more" id="more" type="button" hidden>Mostra altri commenti</button>
-      <span class="status" id="status"></span>
+    <div class="act">
+      <a class="cta cta-main" href="https://tally.so/r/5XXDl6">Firma per la piazza →</a>
+      <p class="meta">Ci vogliono meno di 30 secondi.</p>
     </div>
-    <p class="note">I commenti sono anonimi. Dove indicato, accanto compare il Municipio.</p>
   </section>
 
-  <section class="close">
+  <section class="count grid" aria-label="Firme raccolte">
+    <p class="num" id="total">6</p>
+    <div class="num-meta">
+      <p class="num-label">cittadini hanno già firmato</p>
+      <p class="meta">Aggiornato al <span id="updated">30 ottobre 2026</span>. Le firme saranno consegnate al Comune di Milano.</p>
+    </div>
+  </section>
+
+  <section class="sec story grid">
+    <h2>Perché firmare</h2>
+    <div class="body">
+      <p>Davanti all’abbazia di Santa Maria Bianca della Misericordia <strong>oggi c’è un incrocio</strong>. Il progetto prevede di chiudere al traffico il breve tratto di via Lambrate che sbocca su via Casoretto e di trasformarlo in <strong>uno spazio pedonale: un sagrato per la chiesa</strong>, con panchine, tavolini e fioriere.</p>
+      <p>Non è un’idea nata ieri. Se ne parla dal 2004. Un progetto di sagrato fu approvato nel 2006 dal Consiglio di Zona 3. Nel 2022 il Municipio 3 ha dato parere favorevole e nel 2023 la Giunta ha approvato la pedonalizzazione in forma sperimentale.</p>
+      <p>Chiediamo al Comune e al Municipio 3 di portare avanti il progetto e di accompagnare la piazza con cura, manutenzione e controlli, perché resti uno spazio vissuto da tutti.</p>
+    </div>
+  </section>
+
+  <section class="sec voices-grid grid">
+    <h2>Le voci dei cittadini</h2>
+    <div class="body">
+      <p class="hint">Firme per Municipio. Tocca un riquadro per leggere i commenti.</p>
+      <ul class="tiles" id="bars"></ul>
+      <p class="selinfo" id="selinfo" hidden><span id="selname"></span><button type="button" id="reset">Mostra tutti</button></p>
+      <div class="voices" id="voices"></div>
+      <div class="more-row">
+        <button class="more" id="more" type="button" hidden>Mostra altri commenti</button>
+        <span class="status" id="status"></span>
+      </div>
+      <p class="note">I commenti sono anonimi. Dove indicato, accanto compare il Municipio.</p>
+    </div>
+  </section>
+
+  <section class="sec close grid">
     <h2>Aggiungi la tua firma</h2>
-    <p>Un nome, un clic. Più siamo, più il Comune ascolta.</p>
-    <a class="cta cta-main" href="https://tally.so/r/5XXDl6">Firma per la piazza →</a>
+    <div class="body">
+      <p class="lead">Un nome, un clic. Più siamo, più il Comune ascolta.</p>
+      <a class="cta cta-main" href="https://tally.so/r/5XXDl6">Firma per la piazza →</a>
+    </div>
   </section>
 
-  <section class="follow">
+  <section class="sec follow grid">
     <h2>Resta aggiornato</h2>
-    <p>Raccontiamo come va avanti la piazza di San Materno e le altre iniziative per il quartiere e per la città.</p>
-    <a class="cta cta-alt" href="https://maledettebiciclettemilanesi.substack.com/">Seguici su Maledette Biciclette Milanesi →</a>
+    <div class="body">
+      <p>Raccontiamo come va avanti la piazza di San Materno e le altre iniziative per il quartiere e per la città.</p>
+      <a class="cta cta-alt" href="https://maledettebiciclettemilanesi.substack.com/">Seguici su Maledette Biciclette Milanesi →</a>
+    </div>
   </section>
 
-  <footer class="foot">
-    <p>Raccolta promossa da CAMI – Cittadinanza Attiva Milano insieme a <a href="https://maledettebiciclettemilanesi.substack.com/">Maledette Biciclette Milanesi</a>.</p>
-    <p>Nome, cognome, Municipio (facoltativo) e commento sono raccolti da CAMI solo per consegnare le adesioni al Comune di Milano e cancellati entro 6 mesi dalla consegna. Per accedere ai dati o farli cancellare: cittadinanzaattivamilano@gmail.com</p>
+  <footer class="foot grid">
+    <div class="a"><p>Raccolta promossa da CAMI – Cittadinanza Attiva Milano insieme a <a href="https://maledettebiciclettemilanesi.substack.com/">Maledette Biciclette Milanesi</a>.</p></div>
+    <div class="b"><p>Nome, cognome, Municipio (facoltativo) e commento sono raccolti da CAMI solo per consegnare le adesioni al Comune di Milano e cancellati entro 6 mesi dalla consegna. Per accedere ai dati o farli cancellare: cittadinanzaattivamilano@gmail.com</p></div>
   </footer>
 
 </main>
