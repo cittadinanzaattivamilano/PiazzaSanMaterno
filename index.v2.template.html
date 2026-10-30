@@ -6,78 +6,72 @@
 <meta name="theme-color" content="#ffffff">
 <title>Una piazza a San Materno</title>
 <meta name="description" content="Le firme dei cittadini a favore della piazza pedonale a San Materno, nel centro del Casoretto.">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap">
 <style>
-  /* Blocchi a tutta larghezza con angoli arrotondati, titoli grandi, pulsanti a pillola. Blu CAMI + pastelli. */
-  :root {
-    --blue: #1c44ff; --ink: #11228f;
-    --sage: #e1ebdf; --sky: #d9eef2; --sand: #f1eadc; --peach: #ffe4c6;
-    --font: "Hanken Grotesk", "Helvetica Neue", Arial, sans-serif;
-    color-scheme: light;
-  }
+  /* Bianco, solo blu CAMI, un grotesco leggero con titoli grandi e a righe strette, blocchi blu arrotondati. */
+  :root { --blue: #1c44ff; --font: "Inter", "Helvetica Neue", Arial, sans-serif; color-scheme: light; }
   * { box-sizing: border-box; }
   html { -webkit-text-size-adjust: 100%; }
-  body { margin: 0; background: #fff; color: var(--ink); font-family: var(--font); font-weight: 500; font-size: 20px; line-height: 1.5;
-         padding: 0 max(8px, env(safe-area-inset-left)) 8px; }
+  body { margin: 0; background: #fff; color: var(--blue); font-family: var(--font); font-weight: 400; font-size: 20px; line-height: 1.4; letter-spacing: -.01em;
+         padding: 0 max(12px, env(safe-area-inset-left)) 12px; }
   a { color: var(--blue); text-underline-offset: 3px; }
-  a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
-  .page { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 8px; }
+  a:focus-visible, button:focus-visible, summary:focus-visible, select:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
+  .page { max-width: 720px; margin: 0 auto; }
+  section { padding-top: 56px; }
 
-  .top { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; padding: 16px 12px 8px; font-weight: 800; font-size: 20px; color: var(--blue); letter-spacing: -.01em; }
-  .top span { font-weight: 500; font-size: 16px; color: var(--ink); }
+  .top { display: flex; flex-direction: column; padding: 14px 0 0; font-weight: 500; font-size: 22px; line-height: 1.15; letter-spacing: -.02em; }
+  .top span { font-weight: 400; font-size: 17px; letter-spacing: -.01em; margin-top: 4px; }
 
-  .card { border-radius: 18px; padding: 26px 20px 28px; }
-  .sage { background: var(--sage); } .sky { background: var(--sky); } .sand { background: var(--sand); } .peach { background: var(--peach); }
-  .blue { background: var(--blue); color: #fff; } .outline { border: 2px solid var(--blue); }
-
-  h1 { font-weight: 500; font-size: clamp(46px, 14vw, 88px); line-height: .98; letter-spacing: -.045em; margin: 0 0 22px; color: var(--blue); }
-  h2 { font-weight: 500; font-size: clamp(38px, 11vw, 64px); line-height: 1; letter-spacing: -.04em; margin: 0 0 22px; color: var(--blue); }
-  .blue h2 { color: #fff; }
+  h1 { font-weight: 400; font-size: clamp(44px, 13.5vw, 84px); line-height: .98; letter-spacing: -.045em; margin: 28px 0 24px; }
+  h2 { font-weight: 400; font-size: clamp(38px, 11vw, 60px); line-height: 1; letter-spacing: -.04em; margin: 0 0 24px; }
   p { margin: 0 0 16px; }
-  .lead { font-size: 21px; line-height: 1.4; }
+  strong { font-weight: 700; }
+  .lead { font-size: 22px; line-height: 1.35; }
 
-  .pill {
-    display: block; width: 100%; text-align: center; text-decoration: none; cursor: pointer;
-    font: 800 21px/1.2 var(--font); padding: 20px 18px; border-radius: 999px;
-    background: var(--blue); color: #fff; border: 2px solid var(--blue);
-  }
-  .pill:hover { background: #0f2fd1; }
-  .pill.ghost { background: transparent; color: var(--blue); }
-  .pill.ghost:hover { background: rgba(255,255,255,.6); }
-  .blue .pill { background: #fff; color: var(--blue); border-color: #fff; }
-  .blue .pill:hover { background: #e8ecff; }
+  .num { font-weight: 400; font-size: clamp(170px, 52vw, 300px); line-height: .78; letter-spacing: -.07em; font-variant-numeric: tabular-nums; margin: 0 0 24px; }
+  .num-label { font-weight: 500; font-size: 28px; line-height: 1.15; letter-spacing: -.02em; }
+  .num-label small { display: block; font-weight: 400; font-size: 17px; letter-spacing: -.01em; margin-top: 10px; }
 
-  .num { font-weight: 500; font-size: clamp(150px, 46vw, 260px); line-height: .8; letter-spacing: -.06em; color: var(--blue); font-variant-numeric: tabular-nums; margin: 6px 0 22px; }
-  .num-label { font-weight: 800; font-size: 28px; line-height: 1.15; letter-spacing: -.015em; }
-  .num-label small { display: block; font-weight: 500; font-size: 17px; letter-spacing: 0; margin: 10px 0 22px; }
+  /* Blocco blu arrotondato, come l'immagine nel sito di riferimento */
+  .block { background: var(--blue); color: #fff; border-radius: 20px; padding: 28px 22px 30px; margin-top: 28px; }
+  .block h2 { color: #fff; margin-bottom: 18px; }
+  .block p { margin-bottom: 22px; }
+  .pill { display: block; width: 100%; text-align: center; text-decoration: none; cursor: pointer; font: 700 21px/1.2 var(--font); letter-spacing: -.01em;
+          padding: 20px 18px; border-radius: 999px; background: #fff; color: var(--blue); border: 2px solid #fff; }
+  .pill:hover { background: #e8ecff; }
+  .pill.solid { background: var(--blue); color: #fff; border-color: var(--blue); }
+  .pill.solid:hover { background: #0f2fd1; }
+  .pill.ghost { background: #fff; color: var(--blue); border-color: var(--blue); }
+  .pill.ghost:hover { background: #eef1ff; }
 
   .tiles { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-  .tiles li { background: #fff; border-radius: 14px; padding: 12px; min-width: 0; min-height: 110px; display: flex; flex-direction: column; justify-content: space-between; gap: 14px; font-weight: 800; font-size: 19px; line-height: 1.15; color: var(--blue); }
-  .tiles .unk { background: transparent; border: 2px dashed var(--blue); }
-  .tiles .n { align-self: flex-end; min-width: 52px; height: 52px; padding: 0 10px; border-radius: 10px; display: flex; align-items: center; justify-content: center; background: var(--blue); color: #fff; font-size: 28px; font-variant-numeric: tabular-nums; }
+  .tiles li { border: 2px solid var(--blue); border-radius: 14px; padding: 12px; min-width: 0; min-height: 108px; display: flex; flex-direction: column; justify-content: space-between; gap: 12px; font-weight: 500; font-size: 19px; line-height: 1.15; }
+  .tiles .unk { border-style: dashed; }
+  .tiles .n { align-self: flex-end; min-width: 52px; height: 52px; padding: 0 10px; border-radius: 10px; display: flex; align-items: center; justify-content: center; background: var(--blue); color: #fff; font-weight: 500; font-size: 28px; font-variant-numeric: tabular-nums; }
 
-  .filters { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 18px; }
-  .chip { font: 700 18px/1.1 var(--font); color: var(--blue); background: transparent; border: 2px solid var(--blue); padding: 12px 18px; min-height: 48px; border-radius: 999px; cursor: pointer; }
+  .filters { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 22px; }
+  .chip { font: 500 18px/1.1 var(--font); color: var(--blue); background: #fff; border: 2px solid var(--blue); padding: 12px 18px; min-height: 48px; border-radius: 999px; cursor: pointer; }
   .chip[aria-pressed="true"] { background: var(--blue); color: #fff; }
-  .voices { display: grid; grid-template-columns: 1fr; gap: 8px; }
-  blockquote { margin: 0; padding: 20px; background: #fff; border-radius: 14px; display: flex; flex-direction: column; justify-content: space-between; gap: 18px; min-width: 0; }
-  blockquote p { margin: 0; font-size: 20px; line-height: 1.4; overflow-wrap: anywhere; }
-  blockquote footer { font-weight: 800; font-size: 17px; color: var(--blue); }
-  .more-row { margin-top: 14px; }
+  .voices { display: flex; flex-direction: column; }
+  blockquote { margin: 0; padding: 22px 0; border-top: 1px solid var(--blue); min-width: 0; }
+  blockquote:last-child { border-bottom: 1px solid var(--blue); }
+  blockquote p { margin: 0 0 10px; font-size: 21px; line-height: 1.35; overflow-wrap: anywhere; }
+  blockquote footer { font-weight: 700; font-size: 17px; }
+  .more-row { margin-top: 22px; }
   .status { font-size: 17px; margin: 12px 0 0; }
   .note { font-size: 16px; margin: 12px 0 0; }
 
   details summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 12px; min-height: 56px;
-    font-weight: 500; font-size: clamp(38px, 11vw, 64px); line-height: 1; letter-spacing: -.04em; color: var(--blue); }
+    font-weight: 400; font-size: clamp(38px, 11vw, 60px); line-height: 1; letter-spacing: -.04em; }
   details summary::-webkit-details-marker { display: none; }
-  details summary::after { content: "+"; font-size: 48px; line-height: 1; font-weight: 400; }
+  details summary::after { content: "+"; font-size: 52px; line-height: 1; font-weight: 400; }
   details[open] summary::after { content: "\2212"; }
   details .body { padding-top: 22px; }
 
-  .foot { padding: 18px 12px 28px; font-size: 15px; line-height: 1.6; }
+  .foot { padding: 40px 0 28px; font-size: 15px; line-height: 1.55; }
   .foot p { margin: 0 0 10px; }
 
-  @media (min-width: 640px) { .tiles { grid-template-columns: repeat(3, 1fr); } .voices { grid-template-columns: 1fr 1fr; } .card { padding: 36px 32px 38px; } }
+  @media (min-width: 640px) { .tiles { grid-template-columns: repeat(3, 1fr); } .block { padding: 40px 36px 42px; } }
 </style>
 </head>
 <body>
@@ -85,24 +79,26 @@
 
   <header class="top">Cittadinanza Attiva Milano <span>con Maledette Biciclette Milanesi</span></header>
 
-  <section class="card sage">
+  <section style="padding-top:0">
     <h1>Una piazza a San Materno</h1>
     <p class="lead">Le firme dei cittadini a favore dello spazio pedonale davanti all’abbazia di Santa Maria Bianca della Misericordia, nel centro del Casoretto.</p>
-    <a class="pill" href="https://tally.so/r/5XXDl6">Firma anche tu →</a>
   </section>
 
-  <section class="card sky" aria-label="Firme raccolte">
+  <section aria-label="Firme raccolte">
     <p class="num" id="total">6</p>
     <div class="num-label">firme a favore della piazza<small>Aggiornato al <span id="updated">30 ottobre 2026</span>. Le firme saranno consegnate al Comune di Milano.</small></div>
-    <a class="pill" href="https://tally.so/r/5XXDl6">Firma anche tu →</a>
+    <div class="block" style="margin-top:28px">
+      <p style="font-size:26px;line-height:1.15;letter-spacing:-.02em;font-weight:500">Anche tu vuoi la piazza?</p>
+      <a class="pill" href="https://tally.so/r/5XXDl6">Firma anche tu →</a>
+    </div>
   </section>
 
-  <section class="card sand">
+  <section>
     <h2>Da dove arrivano</h2>
     <ul class="tiles" id="bars"></ul>
   </section>
 
-  <section class="card peach">
+  <section>
     <h2>Le voci dei cittadini</h2>
     <div class="filters" id="filters" hidden></div>
     <div class="voices" id="voices"></div>
@@ -113,7 +109,7 @@
     <p class="note">I commenti sono anonimi. Dove indicato, accanto compare il Municipio.</p>
   </section>
 
-  <section class="card outline">
+  <section>
     <details>
       <summary>Il progetto</summary>
       <div class="body">
@@ -124,10 +120,12 @@
     </details>
   </section>
 
-  <section class="card blue">
-    <h2>Resta aggiornato</h2>
-    <p>Raccontiamo come va avanti la piazza di San Materno e le altre iniziative per il quartiere e per la città.</p>
-    <a class="pill" href="https://maledettebiciclettemilanesi.substack.com/">Seguici su Maledette Biciclette Milanesi →</a>
+  <section>
+    <div class="block" style="margin-top:0">
+      <h2>Resta aggiornato</h2>
+      <p>Raccontiamo come va avanti la piazza di San Materno e le altre iniziative per il quartiere e per la città.</p>
+      <a class="pill" href="https://maledettebiciclettemilanesi.substack.com/">Seguici su Maledette Biciclette Milanesi →</a>
+    </div>
   </section>
 
   <footer class="foot">
