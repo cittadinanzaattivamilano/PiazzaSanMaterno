@@ -112,7 +112,7 @@ if (!key) {
 block = block.split("</").join("<\\/").split(String.fromCharCode(0x2028)).join(" ").split(String.fromCharCode(0x2029)).join(" ");
 
 fs.mkdirSync("dist", { recursive: true });
-for (const [src, out] of [["index.template.html", "dist/index.html"], ["index.v2.template.html", "dist/nuovo.html"]]) {
+for (const [src, out] of [["index.template.html", "dist/index.html"]]) {
   const tpl = fs.readFileSync(src, "utf8");
   if (!tpl.includes("/*@@DATA@@*/")) throw new Error("Segnaposto dati mancante nel template " + src);
   fs.writeFileSync(out, tpl.replace("/*@@DATA@@*/", () => block));
