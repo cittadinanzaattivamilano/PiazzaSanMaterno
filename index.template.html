@@ -122,19 +122,15 @@
   .hint { display: none; }
   @media (min-width: 768px) { .sub { font-size: 18px; line-height: 1.4; margin-top: calc(var(--u) * 1.5); } }
   .hint { font-family: var(--display); font-size: 16px; font-weight: 400; line-height: 1.4; color: var(--blue); margin: 0 0 calc(var(--u) * 2); }
-  /* Filtri dei Municipi nella colonna sinistra, sotto il titolo: nome con freccia, sotto il numero di commenti in maiuscoletto */
-  .fcap { font-family: var(--display); font-size: 15px; font-weight: 400; margin: calc(var(--u) * 5) 0 calc(var(--u) * 1.5); padding-bottom: var(--u); border-bottom: 1px solid var(--blue); }
-  .filter { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: calc(var(--u) * 1.5); font-family: var(--display); }
-  .filter .f { display: flex; flex-direction: column; gap: 3px; border: 0; background: none; padding: 0; margin: 0; cursor: pointer; color: var(--blue); text-align: left; font-family: var(--display); }
-  .filter .k { font-size: 18px; line-height: 1.2; font-weight: 400; }
-  .filter .c { font-size: 11px; line-height: 1.2; font-weight: 400; letter-spacing: .08em; text-transform: uppercase; font-variant-numeric: tabular-nums; }
-  .filter .f:hover .k { text-decoration: underline; text-underline-offset: 3px; }
-  .filter .f[aria-pressed="true"] .k { font-weight: 700; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; }
+  /* Filtro per Municipio: menu a tendina semplice (stile Carbon): etichetta piccola, campo a spigoli vivi, freccia a destra */
+  .pick { display: flex; flex-direction: column; gap: 6px; margin: 0 0 calc(var(--u) * 3); max-width: 320px; font-family: var(--display); }
+  .pick[hidden] { display: none; }
+  .pick label { font-size: 13px; letter-spacing: .02em; }
+  .pick select { -webkit-appearance: none; appearance: none; width: 100%; height: 48px; padding: 0 44px 0 16px; border: 1px solid var(--blue); border-bottom-width: 2px; border-radius: 0; background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath d='M3 6l5 5 5-5' fill='none' stroke='%231c44ff' stroke-width='2'/%3E%3C/svg%3E") no-repeat right 16px center; color: var(--blue); font: 400 16px/1 var(--display); cursor: pointer; }
+  .pick select:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
 
   /* Commenti */
   .selinfo { margin: 0 0 calc(var(--u) * 2); display: flex; gap: calc(var(--u) * 1.5); align-items: center; flex-wrap: wrap; font-family: var(--display); font-weight: 700; font-size: 18px; }
-  .reset { margin-top: calc(var(--u) * 3); border: 0; background: none; padding: 0; cursor: pointer; color: var(--blue); font: 700 16px/1.2 var(--display); text-decoration: underline; text-underline-offset: 3px; }
-  .reset[hidden] { display: none; }
   .more {
     font: 700 16px/1 var(--display); color: #fff; background: var(--blue); border: 2px solid var(--blue); border-radius: 0;
     padding: calc(var(--u) * 1.5) calc(var(--u) * 2); min-height: 48px; cursor: pointer;
@@ -143,19 +139,16 @@
   .selinfo { margin-bottom: calc(var(--u) * 2); padding-bottom: var(--u); border-bottom: 1px solid var(--blue); justify-content: space-between; }
   .selinfo button { border: 0; background: none; padding: 0; min-height: 0; font: 400 16px/1.2 var(--display); color: var(--blue); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
   .selinfo button:hover { text-decoration-thickness: 2px; }
-  .voices { display: grid; grid-template-columns: 1fr; gap: calc(var(--u) * 3); }
-  blockquote { margin: 0; padding: calc(var(--u) * 1.5) 0 0; border: 0; border-top: 1px solid var(--blue); display: flex; flex-direction: column; justify-content: space-between; gap: calc(var(--u) * 1.5); min-width: 0; }
+  .voices { display: grid; grid-template-columns: 1fr; gap: var(--u); }
+  blockquote { margin: 0; padding: calc(var(--u) * 2) calc(var(--u) * 2) calc(var(--u) * 1.5); border: 2px solid var(--blue); display: flex; flex-direction: column; justify-content: space-between; gap: calc(var(--u) * 2); min-width: 0; }
   blockquote p { margin: 0; font-size: 17px; line-height: 1.45; overflow-wrap: anywhere; }
-  blockquote footer { font-family: var(--display); font-weight: 400; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; }
-  .voices.filtered blockquote footer { display: none; }
+  blockquote footer { font-family: var(--display); font-weight: 700; font-size: 13px; letter-spacing: .02em; }
   .more-row { display: flex; align-items: center; gap: calc(var(--u) * 2); flex-wrap: wrap; margin-top: calc(var(--u) * 2); }
   .status { font-family: var(--display); font-size: var(--t-caption); font-weight: 400; color: var(--blue); }
   .note { margin: calc(var(--u) * 3) 0 0; font-family: var(--display); font-size: var(--t-caption); font-weight: 400; line-height: 1.4; color: var(--blue); max-width: 58ch; }
   @media (min-width: 768px) {
     .voices { grid-template-columns: 1fr 1fr; align-items: start; }
-    .vcol { display: flex; flex-direction: column; gap: calc(var(--u) * 4); min-width: 0; }
-    .voices { column-gap: calc(var(--u) * 4); }
-    blockquote p { font-size: 18px; }
+    .vcol { display: flex; flex-direction: column; gap: var(--u); min-width: 0; }
   }
 
   /* Chiusura e aggiornamenti */
@@ -185,7 +178,6 @@
     .hero h1 { margin-bottom: calc(var(--u) * 2); }
     .hero .lead { font-size: 20px; margin-bottom: calc(var(--u) * 3); }
     .meta, .hint, .foot, .foot p { font-size: 13px; }
-    .filter, .fcap, .reset { display: none !important; }
   }
 
   /* Barra di firma, solo quando il pulsante principale non si vede */
@@ -231,12 +223,13 @@
   <section class="sec voices-grid grid">
     <div class="lcol">
       <h2>Le voci <br>dellə cittadinə<span class="sub">I commenti di chi ha firmato</span></h2>
-      <p class="fcap" id="fcap">Filtra i commenti per Municipio</p>
-      <ul class="filter" id="bars" aria-label="Filtra i commenti per Municipio"></ul>
-      <button type="button" class="reset" id="reset" hidden>Vedi tutti →</button>
     </div>
     <div class="body">
       <p class="hint">I commenti di chi ha firmato.</p>
+      <div class="pick" id="pick" hidden>
+        <label for="mun">Municipio</label>
+        <select id="mun"></select>
+      </div>
       <div class="voices" id="voices"></div>
       <div class="more-row">
         <button class="more" id="more" type="button" hidden>Mostra altri commenti →</button>
@@ -351,31 +344,19 @@ var LIVE_URL = "https://piazza-san-matern.cittadinanzaattivamilano.workers.dev";
       status.textContent = list.length
         ? "Commenti " + it.format(shown) + " di " + it.format(list.length)
         : "I primi commenti compariranno qui.";
-      $("reset").hidden = !selected;
-      grid.classList.toggle("filtered", !!selected);
     }
     moreBtn.onclick = function () { render(false); };
 
-    /* Indice dei Municipi: testo semplice, il numero in apice conta i commenti, il tocco li filtra */
+    /* Menu dei Municipi: prima voce = tutti; il conteggio e' sotto i commenti */
     var rows = Object.keys(counts).map(function (k) { return [k, counts[k]]; });
     rows.sort(function (a, b) { return order(a[0]) - order(b[0]); });
-    var box = $("bars"), tiles = [];
-    box.textContent = "";
-    function mark() { tiles.forEach(function (o) { o.b.setAttribute("aria-pressed", o.m === selected ? "true" : "false"); }); }
-    rows.forEach(function (r) {
-      var li = el("li"), t = el("button", "f");
-      t.type = "button";
-      t.appendChild(el("span", "k", r[0] + " →"));
-      t.appendChild(el("span", "c", it.format(r[1]) + (r[1] === 1 ? " commento" : " commenti")));
-      t.setAttribute("aria-label", r[0] + ", " + r[1] + (r[1] === 1 ? " commento" : " commenti"));
-      t.onclick = function () { selected = selected === r[0] ? null : r[0]; mark(); render(true); };
-      tiles.push({ b: t, m: r[0] });
-      li.appendChild(t);
-      box.appendChild(li);
-    });
-    $("reset").onclick = function () { selected = null; mark(); render(true); };
-    $("fcap").hidden = !rows.length;
-    mark();
+    var sel = $("mun");
+    sel.textContent = "";
+    var all = el("option", null, "Tutti i Municipi"); all.value = ""; sel.appendChild(all);
+    rows.forEach(function (r) { var o = el("option", null, r[0]); o.value = r[0]; sel.appendChild(o); });
+    sel.value = selected || "";
+    sel.onchange = function () { selected = sel.value || null; render(true); };
+    $("pick").hidden = rows.length < 2;
     render(true);
     fit();
   }
