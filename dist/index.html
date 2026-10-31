@@ -127,7 +127,8 @@
   button.tile:hover { background: var(--blue); color: #fff; }
   button.tile:hover .n { background: #fff; color: var(--blue); }
   .tile .t { display: flex; align-items: center; padding: var(--u) var(--u) var(--u) calc(var(--u) * 1.5); min-width: 0; }
-  .tile .n { flex: none; min-width: 52px; padding: 0 var(--u); display: flex; align-items: center; justify-content: center; background: var(--blue); color: #fff; font-size: 24px; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+  .tile .n { flex: none; min-width: 64px; padding: calc(var(--u) * .75) var(--u); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; background: var(--blue); color: #fff; font-size: 24px; line-height: 1; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+  .tile .n small { font-size: 10px; font-weight: 400; letter-spacing: .08em; text-transform: uppercase; }
   .tile[aria-pressed="true"] { background: var(--blue); color: #fff; }
   .tile[aria-pressed="true"] .n { background: #fff; color: var(--blue); }
   .tile.unk { border-style: dashed; }
@@ -151,7 +152,9 @@
   .status { font-family: var(--display); font-size: var(--t-caption); font-weight: 400; color: var(--blue); }
   .note { margin: calc(var(--u) * 3) 0 0; font-family: var(--display); font-size: var(--t-caption); font-weight: 400; line-height: 1.4; color: var(--blue); max-width: 58ch; }
   @media (min-width: 768px) {
-    .tiles { grid-template-columns: repeat(3, 1fr); }
+    .tiles { display: flex; flex-wrap: wrap; }
+    .tiles .tile { width: auto; white-space: nowrap; }
+    .tile .t { padding-right: calc(var(--u) * 2); }
     .voices { grid-template-columns: 1fr 1fr; align-items: start; }
     .vcol { display: flex; flex-direction: column; gap: var(--u); min-width: 0; }
   }
@@ -174,6 +177,14 @@
     .hero .count .num { text-align: left; padding-right: 0; font-size: clamp(104px, 32vw, 136px); }
     .hero .count .meta, .hero .act .meta { font-size: 13px; line-height: 1.35; }
     .hero .act .meta { margin-top: var(--u); }
+    /* da 3 cifre la scritta va sotto il numero */
+    .hero .count.stack { display: block; }
+    .hero .count.stack .num { margin: 0 0 var(--u); }
+    .hero .count.stack .num-label { margin: 0 0 calc(var(--u) * .5); }
+    /* meno bianco tra testata e titolo, cosi' il pulsante si vede nella prima schermata */
+    .top + .hero { margin-top: calc(var(--u) * 3 - var(--section)); }
+    .hero h1 { margin-bottom: calc(var(--u) * 2); }
+    .hero .lead { font-size: 20px; margin-bottom: calc(var(--u) * 3); }
     .meta, .hint, .foot, .foot p { font-size: 13px; }
     .tiles, .selinfo { display: none !important; }
     blockquote .m, blockquote cite, blockquote footer { font-size: 13px; }
@@ -204,7 +215,7 @@
     </div>
     <div class="count" aria-label="Firme raccolte">
       <p class="num" id="num"><span id="total">6</span></p>
-      <p class="num-label" id="numlabel">cittadini hanno già firmato</p>
+      <p class="num-label" id="numlabel">cittadinə hanno già firmato</p>
       <p class="meta">Le firme saranno consegnate al Comune di Milano.</p>
     </div>
   </section>
@@ -212,19 +223,19 @@
   <section class="sec story grid">
     <h2>Perché firmare</h2>
     <div class="body">
-      <p>Davanti all’abbazia di Santa Maria Bianca della Misericordia <strong>oggi c’è un incrocio</strong>. Il progetto del Comune prevede di chiudere al traffico il breve tratto di via Lambrate che sbocca su via Casoretto e di farne <strong>uno spazio pedonale: un sagrato per la chiesa</strong>, con panchine, tavolini e fioriere, dove fermarsi, incontrarsi e far giocare i bambini.</p>
+      <p>Davanti all’abbazia di Santa Maria Bianca della Misericordia <strong>oggi c’è un incrocio</strong>. Il progetto del Comune prevede di chiudere al traffico il breve tratto di via Lambrate che sbocca su via Casoretto e di farne <strong>uno spazio pedonale: un sagrato per la chiesa</strong>, con panchine, tavolini e fioriere, dove fermarsi, incontrarsi e far giocare lə bambinə.</p>
       <p>Non è un’idea nata ieri. Se ne parla dal 2004. Un progetto di sagrato fu approvato nel 2006 dal Consiglio di Zona 3. Nel 2022 il Municipio 3 ha dato parere favorevole e nel 2023 la Giunta ha approvato la pedonalizzazione in forma sperimentale.</p>
-      <p>In questi giorni circola anche una raccolta firme contro il progetto. È giusto ascoltare tutti, ma <strong>anche la voce di chi questa piazza la vuole</strong>. Chiediamo al Comune e al Municipio 3 di portare avanti il progetto e di prendersi cura della piazza, con manutenzione e controlli, perché resti uno spazio vissuto da tutti.</p>
+      <p>In questi giorni circola anche una raccolta firme contro il progetto. È giusto ascoltare tuttə, ma <strong>anche la voce di chi questa piazza la vuole</strong>. Chiediamo al Comune e al Municipio 3 di portare avanti il progetto e di prendersi cura della piazza, con manutenzione e controlli, perché resti uno spazio vissuto da tuttə.</p>
       <p class="ref">Per approfondire: <a href="https://blog.urbanfile.org/2023/07/21/milano-casoretto-pedonalizzazione-di-piazza-san-materno-e-via-lambrate/" target="_blank" rel="noopener">Urbanfile, la pedonalizzazione di piazza San Materno e via Lambrate (2023)</a></p>
     </div>
   </section>
 
   <section class="sec voices-grid grid">
-    <h2>Le voci dei cittadini<span class="sub">I commenti di chi ha firmato</span></h2>
+    <h2>Le voci dellə cittadinə<span class="sub">I commenti di chi ha firmato</span></h2>
     <div class="body">
-      <p class="hint">I commenti di chi ha firmato<span class="desk">, divisi per Municipio. Tocca un riquadro per leggerli</span>.</p>
+      <p class="hint">I commenti di chi ha firmato.</p>
       <ul class="tiles" id="bars"></ul>
-      <p class="selinfo" id="selinfo" hidden><span id="selname"></span><button type="button" id="reset">Mostra tutti ×</button></p>
+      <p class="selinfo" id="selinfo" hidden><span id="selname"></span><button type="button" id="reset">Vedi tutti i commenti →</button></p>
       <div class="voices" id="voices"></div>
       <div class="more-row">
         <button class="more" id="more" type="button" hidden>Mostra altri commenti</button>
@@ -242,7 +253,7 @@
   </section>
 
   <section class="sec follow grid">
-    <h2>Resta aggiornato</h2>
+    <h2>Resta aggiornatə</h2>
     <div class="body">
       <p>Su Maledette Biciclette Milanesi raccontiamo come va avanti la piazza di San Materno e le altre iniziative per il quartiere e per la città.</p>
       <a class="cta cta-alt" href="https://maledettebiciclettemilanesi.substack.com/">Leggi gli aggiornamenti →</a>
@@ -259,7 +270,7 @@
 <div class="sticky" id="sticky" hidden><a class="cta" href="https://tally.so/r/5XXDl6">Firma per la piazza →</a></div>
 
 <script>
-var UPDATED = "30 ottobre 2026";
+var UPDATED = "31 ottobre 2026";
 var TOTAL = 6;
 var MUNICIPI = {"Municipio 3":2,"Municipio 2":1,"Municipio 4":1,"Municipio 7":1,"Fuori Milano":1};
 var COMMENTS = [{"m":"Municipio 3","e":true,"ok":true,"t":"Perché il quartiere ha bisogno di più aree pedonali e meno di parcheggi.  Sarà uno spazio che renderà il quartiere più bello e favorirà la socialità!"},{"m":"Municipio 2","e":true,"ok":false,"t":"Perché è un piccolo tassello in più per costruire una città a misura di persone e non al servizio dell'ideologia dell'automobile a tutti i costi."},{"m":"Municipio 3","e":true,"ok":false,"t":"Sono cresciuto in via Ampère e andato all'oratorio Casoretto per 15 anni. È sempre stato un punto dolente la strada subito fuori dal cancello dell'ingresso, per la quantità di bambini che si muovono nelle vicinanze. Inoltre la facciata della chiesa è bellissima e sarebbe bello poterne godere con delle panchine"},{"m":"Municipio 7","e":true,"ok":false,"t":"perché serve distribuire meglio lo spazio in città!"},{"m":"Fuori Milano","e":true,"ok":false,"t":"Perche lo spazio pubblico dedicato alle persone è troppo poco rispetto a quello dedicato alle auto, nella città con i migliori mezzi pubblici in Italia"}];
@@ -290,7 +301,7 @@ var LIVE_URL = "https://piazza-san-matern.cittadinanzaattivamilano.workers.dev";
     num.style.fontSize = "";
     if (!window.matchMedia("(min-width: 768px)").matches) {
       /* telefono: il numero non supera meta' della larghezza, il resto e' per il testo */
-      var wm = $("total").getBoundingClientRect().width, maxW = wrap.clientWidth * 0.5;
+      var wm = $("total").getBoundingClientRect().width, maxW = wrap.clientWidth * (wrap.classList.contains("stack") ? 0.98 : 0.5);
       if (wm > maxW) num.style.fontSize = (parseFloat(getComputedStyle(num).fontSize) * maxW / wm) + "px";
       return;
     }
@@ -308,7 +319,8 @@ var LIVE_URL = "https://piazza-san-matern.cittadinanzaattivamilano.workers.dev";
   function init(D) {
     var TOTAL = D.TOTAL, UPDATED = D.UPDATED, MUNICIPI = D.MUNICIPI, COMMENTS = D.COMMENTS;
     $("total").textContent = it.format(TOTAL);
-    $("numlabel").textContent = TOTAL === 1 ? "cittadino ha già firmato" : "cittadini hanno già firmato";
+    document.querySelector(".count").classList.toggle("stack", TOTAL >= 100);
+    $("numlabel").textContent = TOTAL === 1 ? "cittadinə ha già firmato" : "cittadinə hanno già firmato";
 
     var counts = {};
     COMMENTS.forEach(function (x) { if (x.m) counts[x.m] = (counts[x.m] || 0) + 1; });
@@ -346,10 +358,8 @@ var LIVE_URL = "https://piazza-san-matern.cittadinanzaattivamilano.workers.dev";
     }
     moreBtn.onclick = function () { render(false); };
 
-    /* Riquadri dei Municipi: il numero e' quello delle firme, il tocco filtra i commenti */
-    var rows = Object.keys(MUNICIPI).map(function (k) { return [k, MUNICIPI[k]]; });
-    var munTotal = rows.reduce(function (s, e) { return s + e[1]; }, 0);
-    if (TOTAL > munTotal) rows.push(["Non indicato", TOTAL - munTotal, true]);
+    /* Riquadri dei Municipi: il numero e' quello dei commenti, il tocco li filtra */
+    var rows = Object.keys(counts).map(function (k) { return [k, counts[k]]; });
     rows.sort(function (a, b) { return order(a[0]) - order(b[0]); });
     var box = $("bars"), tiles = [];
     box.textContent = "";
@@ -359,7 +369,9 @@ var LIVE_URL = "https://piazza-san-matern.cittadinanzaattivamilano.workers.dev";
       var clickable = !r[2] && counts[r[0]];
       var t = el(clickable ? "button" : "div", "tile" + (r[2] ? " unk" : ""));
       t.appendChild(el("span", "t", r[0]));
-      t.appendChild(el("span", "n", it.format(r[1])));
+      var n = el("span", "n", it.format(r[1]));
+      n.appendChild(el("small", null, r[1] === 1 ? "commento" : "commenti"));
+      t.appendChild(n);
       if (clickable) {
         t.type = "button";
         t.setAttribute("aria-pressed", "false");
