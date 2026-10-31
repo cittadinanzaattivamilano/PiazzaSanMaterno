@@ -391,8 +391,15 @@ var LIVE_URL = "https://piazza-san-matern.cittadinanzaattivamilano.workers.dev";
       init({ TOTAL: d.total, UPDATED: d.updated, MUNICIPI: d.municipi, COMMENTS: d.comments });
     }).catch(function () {});
   }
+  /* Aggiorna ogni minuto solo se la pagina e' in primo piano, e per al massimo 30 minuti:
+     cosi' le schede dimenticate aperte non consumano le richieste gratuite del Worker */
+  var started = Date.now();
   live();
-  setInterval(live, 60000);
+  setInterval(function () {
+    if (document.hidden || Date.now() - started > 30 * 60000) return;
+    live();
+  }, 60000);
+  document.addEventListener("visibilitychange", function () { if (!document.hidden) { started = Date.now(); live(); } });
 
   /* Barra di firma in basso: compare solo quando il pulsante principale non e' sullo schermo */
   (function () {
