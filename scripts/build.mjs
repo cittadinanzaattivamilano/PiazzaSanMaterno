@@ -18,7 +18,7 @@ const legacy = JSON.parse(fs.readFileSync("data/legacy.json", "utf8"));
 const PUBLISH_IDS = new Set(["5XaYWxd", "X567dAe", "Nq2x0bb", "zE8Aerq", "Nq2veNN", "WJaXkqN", "1WQz57l", "o98YzWe", "4alR1o5", "GeOaJQj", "VpWXJ6M", "4alR4Md", "Nq29KNO", "kb8QMb1", "la89dgo", "je8Y1bQ"]);
 
 function norm(s) {
-  return String(s || "").normalize("NFKD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/\s+/g, " ").trim();
+  return String(s || "").normalize("NFKD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/\s+/g, " ").trim();
 }
 
 async function fetchAll() {
