@@ -84,7 +84,7 @@
 
   /* 2. Il numero: e' il gesto tipografico della pagina. Testo a sinistra, numero a destra; da 768px il blocco e' accanto al testo di apertura. */
   .count { margin-top: calc(var(--u) * 3); display: grid; grid-template-columns: 1fr auto; grid-template-areas: "label num" "meta num"; column-gap: var(--gutter); align-items: end; }
-  .num { grid-area: num; font-weight: 700; font-size: clamp(96px, 30vw, 128px); line-height: .72; letter-spacing: -.06em; color: var(--blue); font-variant-numeric: tabular-nums; margin: 0; padding-right: .06em; white-space: nowrap; text-align: right; }
+  .num { grid-area: num; font-weight: 700; font-size: clamp(96px, 30vw, 128px); line-height: .72; letter-spacing: -.025em; color: var(--blue); font-variant-numeric: tabular-nums; margin: 0; padding-right: .06em; white-space: nowrap; text-align: right; }
   .num-label { grid-area: label; align-self: end; font-size: 20px; line-height: 1.12; font-weight: 700; letter-spacing: -.01em; margin: 0 0 calc(var(--u) * 1.5); }
   .count .meta { grid-area: meta; align-self: start; font-size: 15px; margin: 0; }
   @media (min-width: 768px) {
