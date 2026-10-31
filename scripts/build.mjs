@@ -13,6 +13,10 @@ const exclude = (process.env.EXCLUDE_NAMES || "")
   .split(",").map((n) => norm(n)).filter(Boolean);
 const legacy = JSON.parse(fs.readFileSync("data/legacy.json", "utf8"));
 
+// Commenti arrivati quando la casella del permesso era in fondo al modulo (fino al 31/10 ore 18:35):
+// verificati a mano, senza dati personali, pubblicati per scelta degli organizzatori. Chi vuole puo' chiederne la rimozione per email.
+const PUBLISH_IDS = new Set(["5XaYWxd", "X567dAe", "Nq2x0bb", "zE8Aerq", "Nq2veNN", "WJaXkqN", "1WQz57l", "o98YzWe", "4alR1o5", "GeOaJQj", "VpWXJ6M", "4alR4Md", "Nq29KNO", "kb8QMb1", "la89dgo", "je8Y1bQ"]);
+
 function norm(s) {
   return String(s || "").normalize("NFKD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/\s+/g, " ").trim();
 }
@@ -90,7 +94,7 @@ function build({ subs, questions }) {
     if (m) mun[m] = (mun[m] || 0) + 1;
 
     const why = answerStrings(byQ.get(qWhy), map).join(" ").replace(/\s+/g, " ").trim();
-    const ok = answerStrings(byQ.get(qPub), map).length > 0;
+    const ok = answerStrings(byQ.get(qPub), map).length > 0 || PUBLISH_IDS.has(s.id);
     if (why && ok) comments.push({ m: m || null, ok: true, t: why.slice(0, MAX_COMMENT) });
   }
 

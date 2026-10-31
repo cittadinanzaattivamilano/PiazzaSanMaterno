@@ -9,6 +9,10 @@ const CACHE_SECONDS = 30;
 const ALLOWED_ORIGIN = "https://cittadinanzaattivamilano.github.io";
 const LEGACY = {"total":6,"municipi":{"Municipio 3":2,"Municipio 2":1,"Municipio 4":1,"Municipio 7":1,"Fuori Milano":1},"comments":[{"m":"Municipio 3","e":true,"ok":true,"t":"Perché il quartiere ha bisogno di più aree pedonali e meno di parcheggi.  Sarà uno spazio che renderà il quartiere più bello e favorirà la socialità!"},{"m":"Municipio 2","e":true,"ok":false,"t":"Perché è un piccolo tassello in più per costruire una città a misura di persone e non al servizio dell'ideologia dell'automobile a tutti i costi."},{"m":"Municipio 3","e":true,"ok":false,"t":"Sono cresciuto in via Ampère e andato all'oratorio Casoretto per 15 anni. È sempre stato un punto dolente la strada subito fuori dal cancello dell'ingresso, per la quantità di bambini che si muovono nelle vicinanze. Inoltre la facciata della chiesa è bellissima e sarebbe bello poterne godere con delle panchine"},{"m":"Municipio 7","e":true,"ok":false,"t":"perché serve distribuire meglio lo spazio in città!"},{"m":"Fuori Milano","e":true,"ok":false,"t":"Perche lo spazio pubblico dedicato alle persone è troppo poco rispetto a quello dedicato alle auto, nella città con i migliori mezzi pubblici in Italia"}]};
 
+// Commenti arrivati quando la casella del permesso era in fondo al modulo (fino al 31/10 ore 18:35):
+// verificati a mano, senza dati personali, pubblicati per scelta degli organizzatori. Chi vuole puo' chiederne la rimozione per email.
+const PUBLISH_IDS = new Set(["5XaYWxd", "X567dAe", "Nq2x0bb", "zE8Aerq", "Nq2veNN", "WJaXkqN", "1WQz57l", "o98YzWe", "4alR1o5", "GeOaJQj", "VpWXJ6M", "4alR4Md", "Nq29KNO", "kb8QMb1", "la89dgo", "je8Y1bQ"]);
+
 function norm(s) {
   return String(s || "").normalize("NFKD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/\s+/g, " ").trim();
 }
@@ -81,7 +85,7 @@ function compute({ subs, questions }, exclude) {
     const m = answerStrings(byQ.get(qMun), map).find((x) => /^Municipio [1-9]$|^Fuori Milano$/.test(x));
     if (m) mun[m] = (mun[m] || 0) + 1;
     const why = answerStrings(byQ.get(qWhy), map).join(" ").replace(/\s+/g, " ").trim();
-    const ok = answerStrings(byQ.get(qPub), map).length > 0;
+    const ok = answerStrings(byQ.get(qPub), map).length > 0 || PUBLISH_IDS.has(s.id);
     if (why && ok) comments.push({ m: m || null, ok: true, t: why.slice(0, MAX_COMMENT) });
   }
 
