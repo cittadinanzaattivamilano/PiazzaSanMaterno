@@ -226,7 +226,6 @@
     <h2>Le voci dellə cittadinə<span class="sub">I commenti di chi ha firmato</span></h2>
     <div class="body">
       <p class="hint">I commenti di chi ha firmato.</p>
-      <p class="fcap" id="fcap">Filtra i commenti per Municipio</p>
       <ul class="filter" id="bars" aria-label="Commenti per Municipio"></ul>
       <p class="selinfo" id="selinfo" hidden><span id="selname"></span><button type="button" id="reset">Vedi tutti →</button></p>
       <div class="voices" id="voices"></div>
@@ -347,7 +346,7 @@ var LIVE_URL = "https://piazza-san-matern.cittadinanzaattivamilano.workers.dev";
         ? "Commenti " + it.format(shown) + " di " + it.format(list.length)
         : "I primi commenti compariranno qui.";
       $("selinfo").hidden = !selected;
-      $("selname").textContent = selected ? "Commenti " + (/^Municipio/.test(selected) ? "dal " : "da ") + selected : "";
+      $("selname").textContent = selected ? it.format(list.length) + (list.length === 1 ? " commento " : " commenti ") + (/^Municipio/.test(selected) ? "dal " : "da ") + selected : "";
     }
     moreBtn.onclick = function () { render(false); };
 
@@ -361,7 +360,6 @@ var LIVE_URL = "https://piazza-san-matern.cittadinanzaattivamilano.workers.dev";
       var li = el("li"), t = el("button", "f");
       t.type = "button";
       t.appendChild(el("span", "k", r[0]));
-      t.appendChild(el("span", "c", it.format(r[1])));
       t.setAttribute("aria-label", r[0] + ", " + r[1] + (r[1] === 1 ? " commento" : " commenti"));
       t.onclick = function () { selected = selected === r[0] ? null : r[0]; mark(); render(true); };
       tiles.push({ b: t, m: r[0] });
@@ -369,7 +367,6 @@ var LIVE_URL = "https://piazza-san-matern.cittadinanzaattivamilano.workers.dev";
       box.appendChild(li);
     });
     $("reset").onclick = function () { selected = null; mark(); render(true); };
-    $("fcap").hidden = !rows.length;
     mark();
     render(true);
     fit();
