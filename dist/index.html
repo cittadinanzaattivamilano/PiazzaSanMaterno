@@ -99,7 +99,7 @@
   .sec.grid { grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); row-gap: 0; }
   .sec > .lcol { grid-column: 1; position: sticky; top: calc(var(--u) * 2); align-self: start; }
   .sec > .lcol > h2 { position: static; }
-  .sec > h2, .sec > .lcol > h2 { grid-column: 1; font-size: 20px; line-height: 1.1; letter-spacing: -.02em; position: sticky; top: calc(var(--u) * 2); align-self: start; margin: 0; hyphens: auto; overflow-wrap: anywhere; }
+  .sec > h2, .sec > .lcol > h2 { grid-column: 1; font-size: 20px; line-height: 1.1; letter-spacing: -.02em; position: sticky; top: calc(var(--u) * 2); align-self: start; margin: 0; hyphens: manual; overflow-wrap: normal; }
   .sec > .body { grid-column: 2; }
   .sec .body p { font-size: 17px; line-height: 1.5; }
   @media (min-width: 768px) {
@@ -133,7 +133,8 @@
 
   /* Commenti */
   .selinfo { margin: 0 0 calc(var(--u) * 2); display: flex; gap: calc(var(--u) * 1.5); align-items: center; flex-wrap: wrap; font-family: var(--display); font-weight: 700; font-size: 18px; }
-  .selinfo[hidden] { display: none; }
+  .reset { margin-top: calc(var(--u) * 3); border: 0; background: none; padding: 0; cursor: pointer; color: var(--blue); font: 700 16px/1.2 var(--display); text-decoration: underline; text-underline-offset: 3px; }
+  .reset[hidden] { display: none; }
   .more {
     font: 700 16px/1 var(--display); color: #fff; background: var(--blue); border: 2px solid var(--blue); border-radius: 0;
     padding: calc(var(--u) * 1.5) calc(var(--u) * 2); min-height: 48px; cursor: pointer;
@@ -142,16 +143,19 @@
   .selinfo { margin-bottom: calc(var(--u) * 2); padding-bottom: var(--u); border-bottom: 1px solid var(--blue); justify-content: space-between; }
   .selinfo button { border: 0; background: none; padding: 0; min-height: 0; font: 400 16px/1.2 var(--display); color: var(--blue); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
   .selinfo button:hover { text-decoration-thickness: 2px; }
-  .voices { display: grid; grid-template-columns: 1fr; gap: var(--u); }
-  blockquote { margin: 0; padding: calc(var(--u) * 2) calc(var(--u) * 2) calc(var(--u) * 1.5); border: 2px solid var(--blue); display: flex; flex-direction: column; justify-content: space-between; gap: calc(var(--u) * 2); min-width: 0; }
+  .voices { display: grid; grid-template-columns: 1fr; gap: calc(var(--u) * 3); }
+  blockquote { margin: 0; padding: calc(var(--u) * 1.5) 0 0; border: 0; border-top: 1px solid var(--blue); display: flex; flex-direction: column; justify-content: space-between; gap: calc(var(--u) * 1.5); min-width: 0; }
   blockquote p { margin: 0; font-size: 17px; line-height: 1.45; overflow-wrap: anywhere; }
-  blockquote footer { font-family: var(--display); font-weight: 700; font-size: var(--t-caption); letter-spacing: .02em; }
+  blockquote footer { font-family: var(--display); font-weight: 400; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; }
+  .voices.filtered blockquote footer { display: none; }
   .more-row { display: flex; align-items: center; gap: calc(var(--u) * 2); flex-wrap: wrap; margin-top: calc(var(--u) * 2); }
   .status { font-family: var(--display); font-size: var(--t-caption); font-weight: 400; color: var(--blue); }
   .note { margin: calc(var(--u) * 3) 0 0; font-family: var(--display); font-size: var(--t-caption); font-weight: 400; line-height: 1.4; color: var(--blue); max-width: 58ch; }
   @media (min-width: 768px) {
     .voices { grid-template-columns: 1fr 1fr; align-items: start; }
-    .vcol { display: flex; flex-direction: column; gap: var(--u); min-width: 0; }
+    .vcol { display: flex; flex-direction: column; gap: calc(var(--u) * 4); min-width: 0; }
+    .voices { column-gap: calc(var(--u) * 4); }
+    blockquote p { font-size: 18px; }
   }
 
   /* Chiusura e aggiornamenti */
@@ -181,8 +185,7 @@
     .hero h1 { margin-bottom: calc(var(--u) * 2); }
     .hero .lead { font-size: 20px; margin-bottom: calc(var(--u) * 3); }
     .meta, .hint, .foot, .foot p { font-size: 13px; }
-    .filter, .fcap, .selinfo { display: none !important; }
-    blockquote .m, blockquote cite, blockquote footer { font-size: 13px; }
+    .filter, .fcap, .reset { display: none !important; }
   }
 
   /* Barra di firma, solo quando il pulsante principale non si vede */
@@ -227,13 +230,13 @@
 
   <section class="sec voices-grid grid">
     <div class="lcol">
-      <h2>Le voci dellə cittadinə<span class="sub">I commenti di chi ha firmato</span></h2>
+      <h2>Le voci <br>dellə cittadinə<span class="sub">I commenti di chi ha firmato</span></h2>
       <p class="fcap" id="fcap">Filtra i commenti per Municipio</p>
       <ul class="filter" id="bars" aria-label="Filtra i commenti per Municipio"></ul>
+      <button type="button" class="reset" id="reset" hidden>Vedi tutti →</button>
     </div>
     <div class="body">
       <p class="hint">I commenti di chi ha firmato.</p>
-      <p class="selinfo" id="selinfo" hidden><span id="selname"></span><button type="button" id="reset">Vedi tutti →</button></p>
       <div class="voices" id="voices"></div>
       <div class="more-row">
         <button class="more" id="more" type="button" hidden>Mostra altri commenti →</button>
@@ -351,8 +354,8 @@ var LIVE_URL = "https://piazza-san-matern.cittadinanzaattivamilano.workers.dev";
       status.textContent = list.length
         ? "Commenti " + it.format(shown) + " di " + it.format(list.length)
         : "I primi commenti compariranno qui.";
-      $("selinfo").hidden = !selected;
-      $("selname").textContent = selected ? it.format(list.length) + (list.length === 1 ? " commento " : " commenti ") + (/^Municipio/.test(selected) ? "dal " : "da ") + selected : "";
+      $("reset").hidden = !selected;
+      grid.classList.toggle("filtered", !!selected);
     }
     moreBtn.onclick = function () { render(false); };
 
