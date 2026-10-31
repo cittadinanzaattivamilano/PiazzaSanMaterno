@@ -122,12 +122,12 @@
   .hint { display: none; }
   @media (min-width: 768px) { .sub { font-size: 18px; line-height: 1.4; margin-top: calc(var(--u) * 1.5); } }
   .hint { font-family: var(--display); font-size: 16px; font-weight: 400; line-height: 1.4; color: var(--blue); margin: 0 0 calc(var(--u) * 2); }
-  /* Filtro per Municipio: menu a tendina semplice (stile Carbon): etichetta piccola, campo a spigoli vivi, freccia a destra */
-  .pick { display: flex; flex-direction: column; gap: 6px; margin: 0 0 calc(var(--u) * 3); max-width: 320px; font-family: var(--display); }
-  .pick[hidden] { display: none; }
-  .pick label { font-size: 13px; letter-spacing: .02em; }
-  .pick select { -webkit-appearance: none; appearance: none; width: 100%; height: 48px; padding: 0 44px 0 16px; border: 1px solid var(--blue); border-bottom-width: 2px; border-radius: 0; background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath d='M3 6l5 5 5-5' fill='none' stroke='%231c44ff' stroke-width='2'/%3E%3C/svg%3E") no-repeat right 16px center; color: var(--blue); font: 400 16px/1 var(--display); cursor: pointer; }
-  .pick select:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
+  /* Filtri dei Municipi: etichette compatte a spigoli vivi, solo il nome; scelto = blu pieno */
+  .filter { list-style: none; margin: 0 0 calc(var(--u) * 3); padding: 0; display: flex; flex-wrap: wrap; gap: var(--u); font-family: var(--display); }
+  .filter .f { border: 1px solid var(--blue); border-radius: 0; background: #fff; padding: var(--u) calc(var(--u) * 1.5); margin: 0; cursor: pointer; color: var(--blue); font: 400 15px/1.2 var(--display); white-space: nowrap; }
+  .filter .f:hover { box-shadow: inset 0 0 0 1px var(--blue); }
+  .filter .f[aria-pressed="true"] { background: var(--blue); color: #fff; }
+  .selinfo[hidden] { display: none; }
 
   /* Commenti */
   .selinfo { margin: 0 0 calc(var(--u) * 2); display: flex; gap: calc(var(--u) * 1.5); align-items: center; flex-wrap: wrap; font-family: var(--display); font-weight: 700; font-size: 18px; }
@@ -161,6 +161,8 @@
   .foot p { margin: 0 0 var(--u); max-width: 64ch; }
   @media (min-width: 768px) { .foot .a { grid-column: 1 / 5; } .foot .b { grid-column: 5 / 13; } }
 
+  /* filtri solo da desktop */
+  @media (max-width: 767px) { .filter, .selinfo { display: none !important; } }
   /* Telefono: dopo il testo di apertura prima il numero, poi il pulsante di firma; testi secondari piu' piccoli */
   @media (max-width: 767px) {
     .hero .count { grid-column: 1 / -1; grid-row: 3; margin-top: 0; margin-bottom: calc(var(--u) * 3); }
@@ -226,10 +228,8 @@
     </div>
     <div class="body">
       <p class="hint">I commenti di chi ha firmato.</p>
-      <div class="pick" id="pick" hidden>
-        <label for="mun">Municipio</label>
-        <select id="mun"></select>
-      </div>
+      <ul class="filter" id="bars" aria-label="Filtra i commenti per Municipio"></ul>
+      <p class="selinfo" id="selinfo" hidden><span id="selname"></span><button type="button" id="reset">Vedi tutti →</button></p>
       <div class="voices" id="voices"></div>
       <div class="more-row">
         <button class="more" id="more" type="button" hidden>Mostra altri commenti →</button>
@@ -342,6 +342,8 @@ var LIVE_URL = "https://piazza-san-matern.cittadinanzaattivamilano.workers.dev";
         if (window.matchMedia("(min-width: 768px)").matches) { grid.appendChild(el("div", "vcol")); grid.appendChild(el("div", "vcol")); }
       }
       var list = current();
+      $("selinfo").hidden = !selected;
+      $("selname").textContent = selected ? "Commenti " + (/^Municipio/.test(selected) ? "dal " : "da ") + selected : "";
       list.slice(shown, shown + PAGE).forEach(function (x) { card(x); shown++; });
       moreBtn.hidden = shown >= list.length;
       status.textContent = list.length
@@ -350,16 +352,22 @@ var LIVE_URL = "https://piazza-san-matern.cittadinanzaattivamilano.workers.dev";
     }
     moreBtn.onclick = function () { render(false); };
 
-    /* Menu dei Municipi: prima voce = tutti; il conteggio e' sotto i commenti */
-    var rows = Object.keys(counts).map(function (k) { return [k, counts[k]]; });
-    rows.sort(function (a, b) { return order(a[0]) - order(b[0]); });
-    var sel = $("mun");
-    sel.textContent = "";
-    var all = el("option", null, "Tutti i Municipi"); all.value = ""; sel.appendChild(all);
-    rows.forEach(function (r) { var o = el("option", null, r[0]); o.value = r[0]; sel.appendChild(o); });
-    sel.value = selected || "";
-    sel.onchange = function () { selected = sel.value || null; render(true); };
-    $("pick").hidden = rows.length < 2;
+    /* Filtri dei Municipi: solo il nome; il tocco filtra, "Vedi tutti" torna alla vista iniziale */
+    var rows = Object.keys(counts).sort(function (a, b) { return order(a) - order(b); });
+    var box = $("bars"), tiles = [];
+    box.textContent = "";
+    function mark() { tiles.forEach(function (o) { o.b.setAttribute("aria-pressed", o.m === selected ? "true" : "false"); }); }
+    rows.forEach(function (m) {
+      var li = el("li"), t = el("button", "f", m);
+      t.type = "button";
+      t.onclick = function () { selected = selected === m ? null : m; mark(); render(true); };
+      tiles.push({ b: t, m: m });
+      li.appendChild(t);
+      box.appendChild(li);
+    });
+    box.hidden = rows.length < 2;
+    $("reset").onclick = function () { selected = null; mark(); render(true); };
+    mark();
     render(true);
     fit();
   }
