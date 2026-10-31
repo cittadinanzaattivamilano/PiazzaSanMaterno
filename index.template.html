@@ -119,15 +119,15 @@
   .hint { display: none; }
   @media (min-width: 768px) { .sub { font-size: 18px; line-height: 1.4; margin-top: calc(var(--u) * 1.5); } }
   .hint { font-family: var(--display); font-size: 16px; font-weight: 400; line-height: 1.4; color: var(--blue); margin: 0 0 calc(var(--u) * 2); }
-  /* Indice dei Municipi: tabella tipografica, filetto sopra ogni voce; scelta = filetto spesso e neretto */
-  .fcap { font-family: var(--display); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; margin: 0 0 var(--u); }
-  .filter { list-style: none; margin: 0 0 calc(var(--u) * 3); padding: 0; display: grid; grid-template-columns: repeat(10, minmax(0, 1fr)); gap: calc(var(--u) * 2) calc(var(--u) * 1.5); font-family: var(--display); }
-  .filter .f { width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: space-between; gap: 4px; text-align: left; border: 0; border-top: 1px solid var(--blue); background: none; padding: var(--u) 0 0; margin: 0; cursor: pointer; color: var(--blue); font-family: var(--display); }
-  .filter .k { font-size: 15px; line-height: 1.15; font-weight: 700; }
-  .filter .c { font-size: 15px; line-height: 1; font-weight: 400; font-variant-numeric: tabular-nums; }
+  /* Indice dei Municipi: tabella a due colonne, una riga per Municipio con nome a sinistra e commenti a destra */
+  .fcap { font-family: var(--display); font-size: 15px; font-weight: 700; margin: 0; padding-bottom: var(--u); border-bottom: 1px solid var(--blue); }
+  .filter { list-style: none; margin: 0 0 calc(var(--u) * 4); padding: 0; display: grid; grid-template-columns: 1fr 1fr; column-gap: calc(var(--u) * 3); font-family: var(--display); }
+  .filter .f { width: 100%; display: flex; justify-content: space-between; align-items: baseline; gap: var(--u); text-align: left; border: 0; border-bottom: 1px solid var(--blue); background: none; padding: calc(var(--u) * 1.25) var(--u); margin: 0; cursor: pointer; color: var(--blue); font: 400 16px/1.2 var(--display); }
+  .filter .k { font-weight: 700; }
+  .filter .c { font-variant-numeric: tabular-nums; white-space: nowrap; }
   .filter .f:hover .k { text-decoration: underline; text-underline-offset: 3px; }
-  .filter .f[aria-pressed="true"] { border-top: 4px solid var(--blue); padding-top: calc(var(--u) - 3px); }
-  .filter .f[aria-pressed="true"] .c { font-weight: 700; }
+  .filter .f[aria-pressed="true"] { background: var(--blue); color: #fff; }
+  .filter .f[aria-pressed="true"] .k { text-decoration: none; }
 
   /* Commenti */
   .selinfo { margin: 0 0 calc(var(--u) * 2); display: flex; gap: calc(var(--u) * 1.5); align-items: center; flex-wrap: wrap; font-family: var(--display); font-weight: 700; font-size: 18px; }
@@ -227,7 +227,7 @@
     <h2>Le voci dellə cittadinə<span class="sub">I commenti di chi ha firmato</span></h2>
     <div class="body">
       <p class="hint">I commenti di chi ha firmato.</p>
-      <p class="fcap" id="fcap">Commenti per Municipio</p>
+      <p class="fcap" id="fcap">Leggi i commenti per Municipio</p>
       <ul class="filter" id="bars" aria-label="Commenti per Municipio"></ul>
       <p class="selinfo" id="selinfo" hidden><span id="selname"></span><button type="button" id="reset">Vedi tutti →</button></p>
       <div class="voices" id="voices"></div>
@@ -358,8 +358,8 @@ var LIVE_URL = "https://piazza-san-matern.cittadinanzaattivamilano.workers.dev";
     rows.forEach(function (r) {
       var li = el("li"), t = el("button", "f");
       t.type = "button";
-      t.appendChild(el("span", "k", r[0].replace(/^Municipio /, "")));
-      t.appendChild(el("span", "c", it.format(r[1])));
+      t.appendChild(el("span", "k", r[0]));
+      t.appendChild(el("span", "c", it.format(r[1]) + (r[1] === 1 ? " commento" : " commenti")));
       t.setAttribute("aria-label", r[0] + ", " + r[1] + (r[1] === 1 ? " commento" : " commenti"));
       t.onclick = function () { selected = selected === r[0] ? null : r[0]; mark(); render(true); };
       tiles.push({ b: t, m: r[0] });
