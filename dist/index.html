@@ -14,7 +14,8 @@
      Spazio: multipli di 8. Griglia: 4 colonne su telefono, 12 da tablet in su.
      Tipografia: Forma DJR nella taglia ottica del corpo. Banner oltre i 60px (numero, titolo da desktop),
      Display 29-60px (titoli), Deck 19-28px (lead, pulsanti, titoli di sezione da telefono), Text fino a 18px.
-     Pesi: 400 testo, 500 lead, 600 pulsanti ed evidenze (Forma non ha il 600: si usa il Bold), 700 titoli. Riserva: Helvetica Neue.
+     Pesi: 400 testo e lead, 700 evidenze nel testo e titoli, 600 pulsanti (Forma non ha il 600: si usa il Bold).
+     Il lead e' Regular e non Medium, perche' le evidenze in Bold si distinguano. Riserva: Helvetica Neue.
      Scala: 15 caption / 18-20 testo / 22-26 lead / 32-44 titolo sezione / 40-88 titolo pagina / 120-260 numero. */
   @font-face { font-family: "CAMI Forma DJR Banner"; src: url("fonts/FormaDJRBanner-Bold.woff2") format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
   @font-face { font-family: "CAMI Forma DJR Display"; src: url("fonts/FormaDJRDisplay-Bold.woff2") format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
@@ -51,7 +52,7 @@
   }
   a { color: var(--blue); text-underline-offset: 3px; }
   a:focus-visible, button:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
-  strong { font-weight: 600; }
+  strong { font-weight: 700; }
 
   /* Griglia: 4 colonne, 12 da 768px */
   .wrap { max-width: 1080px; margin: 0 auto; display: flex; flex-direction: column; gap: var(--section); padding-bottom: 64px; }
@@ -72,7 +73,7 @@
   h2 { font-size: var(--t-h2); line-height: 1.04; letter-spacing: -.015em; }
   p { margin: 0 0 calc(var(--u) * 2); }
   p:last-child { margin-bottom: 0; }
-  .lead { font-family: var(--deck); font-size: var(--t-lead); line-height: 1.38; max-width: 34ch; font-weight: 500; }
+  .lead { font-family: var(--deck); font-size: var(--t-lead); line-height: 1.38; max-width: 34ch; font-weight: 400; }
   .meta { font-family: var(--display); font-size: var(--t-caption); line-height: 1.4; font-weight: 400; color: var(--blue); }
 
   /* Pulsanti */
